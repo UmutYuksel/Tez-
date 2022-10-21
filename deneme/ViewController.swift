@@ -130,7 +130,7 @@ class ViewController: UIViewController {
                     }
                     print("Upload Edilen Görüntünün Url Adresi :\(url?.absoluteString ?? "Link Yok")")
                 
-                    let eklenecekVeri = ["KullanciAdi" : KullaniciAdi,
+                    let eklenecekVeri = ["KullaniciAdi " : KullaniciAdi,
                                          "KullaniciID" : kaydolanKullaniciID,
                                          "ProfilGoruntuUrl" : url?.absoluteString ?? ""]
                     
@@ -143,12 +143,8 @@ class ViewController: UIViewController {
                             }
                             print("Kullanıcı Verileri FireStore'a Kaydedildi")
                             hud.dismiss(animated: true)
-                            self.btnFotografEkle.setImage(UIImage(named: "instagram.png"), for: .normal)
-                            self.btnFotografEkle.layer.borderColor = UIColor.clear.cgColor
-                            self.btnFotografEkle.layer.borderWidth = 0
-                            self.txtEmail.text = ""
-                            self.txtKullaniciAdi.text = ""
-                            self.txtParola.text = ""
+                            self.gorunumuDüzelt()
+                            
                         }
                 }
                 
@@ -159,7 +155,18 @@ class ViewController: UIViewController {
         }
             
         }
-    
+    fileprivate func gorunumuDüzelt() {
+        self.btnFotografEkle.setImage(UIImage(named: "instagram.png"), for: .normal)
+        self.btnFotografEkle.layer.borderColor = UIColor.clear.cgColor
+        self.btnFotografEkle.layer.borderWidth = 0
+        self.txtEmail.text = ""
+        self.txtKullaniciAdi.text = ""
+        self.txtParola.text = ""
+        let basariliHud = JGProgressHUD(style: .light)
+        basariliHud.textLabel.text = "Kayıt İşlemi Başarılı"
+        basariliHud.show(in: self.view)
+        basariliHud.dismiss(afterDelay: 0.5)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
