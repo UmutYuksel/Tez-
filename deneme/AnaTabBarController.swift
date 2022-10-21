@@ -7,11 +7,24 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class AnaTabBarController : UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if Auth.auth().currentUser == nil {
+            DispatchQueue.main.async {
+                let oturumAcController = OturumAcController()
+               
+                let navController = UINavigationController(rootViewController: oturumAcController)
+                navController.modalPresentationStyle = .fullScreen
+                self.present(navController, animated: true, completion: nil)
+                
+            }
+            return
+        }
         
         let layout = UICollectionViewFlowLayout()
         let kullaniciProfilController = KullanıcıProfilController(collectionViewLayout: layout)

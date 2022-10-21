@@ -12,12 +12,65 @@ import FirebaseFirestore
 
 class KullanıcıProfilController : UICollectionViewController {
     
+    let paylasimHucreID = "paylaşımHücreID"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
         kullaniciyiGetir()
         collectionView.register(KullanıcıProfilHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerID")
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: paylasimHucreID)
+        btnOturumKapatOlustur()
     }
+    
+    fileprivate func btnOturumKapatOlustur() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "settings.png")?.withRenderingMode(.alwaysOriginal),style: .plain, target: self ,action: #selector(oturumKapat))
+    }
+    
+    @objc fileprivate func oturumKapat() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let actionOturumuKapat = UIAlertAction(title: "Oturumu Kapat", style: .destructive) { (_) in
+            
+            guard let _ = Auth.auth().currentUser?.uid else { return }
+            do {
+                try Auth.auth().signOut()
+            } catch let oturumuKapatmaHatasi {
+                print("Oturumu Kapatırken hata oldu",oturumuKapatmaHatasi)
+            }
+        }
+        let actionIptalEt = UIAlertAction(title: "İptal Et", style: .cancel, handler: nil)
+        alertController.addAction(actionOturumuKapat)
+        alertController.addAction(actionIptalEt)
+        present(alertController, animated: true, completion: nil)
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let genislik = (view.frame.width - 5) / 3
+        return CGSize(width: genislik, height: genislik)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let paylasimHucre = collectionView.dequeueReusableCell(withReuseIdentifier: paylasimHucreID, for: indexPath)
+        paylasimHucre.backgroundColor = .lightGray
+        return paylasimHucre
+    }
+    
+    
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerID", for: indexPath) as! KullanıcıProfilHeader
@@ -30,6 +83,7 @@ class KullanıcıProfilController : UICollectionViewController {
     fileprivate func kullaniciyiGetir() {
         
         guard let gecerliKullaniciID = Auth.auth().currentUser?.uid else { return }
+        
         
         Firestore.firestore().collection("Kullanicilar").document(gecerliKullaniciID).getDocument { (snapshot , hata ) in
             
@@ -45,6 +99,7 @@ class KullanıcıProfilController : UICollectionViewController {
             
         }
     }
+
 }
 
 

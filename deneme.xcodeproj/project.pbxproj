@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9244A36D2902E2D500E77961 /* OturumAcController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9244A36C2902E2D500E77961 /* OturumAcController.swift */; };
 		924F7CE528FD679F003E043E /* AnaTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924F7CE428FD679E003E043E /* AnaTabBarController.swift */; };
 		924F7CE828FD6823003E043E /* KullanıcıProfilController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924F7CE728FD6823003E043E /* KullanıcıProfilController.swift */; };
 		924F7CEB28FD7A94003E043E /* KullanıcıProfilHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924F7CEA28FD7A94003E043E /* KullanıcıProfilHeader.swift */; };
 		924F7CEE28FD818F003E043E /* Kullanıcı.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924F7CED28FD818F003E043E /* Kullanıcı.swift */; };
 		92B6F19028F874DC00CDAF7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B6F18F28F874DC00CDAF7A /* AppDelegate.swift */; };
 		92B6F19228F874DC00CDAF7A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B6F19128F874DC00CDAF7A /* SceneDelegate.swift */; };
-		92B6F19428F874DC00CDAF7A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B6F19328F874DC00CDAF7A /* ViewController.swift */; };
+		92B6F19428F874DC00CDAF7A /* KayitOlController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B6F19328F874DC00CDAF7A /* KayitOlController.swift */; };
 		92B6F19728F874DC00CDAF7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92B6F19528F874DC00CDAF7A /* Main.storyboard */; };
 		92B6F19928F874E000CDAF7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92B6F19828F874E000CDAF7A /* Assets.xcassets */; };
 		92B6F19C28F874E000CDAF7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92B6F19A28F874E000CDAF7A /* LaunchScreen.storyboard */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9244A36C2902E2D500E77961 /* OturumAcController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OturumAcController.swift; sourceTree = "<group>"; };
 		924F7CE428FD679E003E043E /* AnaTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnaTabBarController.swift; sourceTree = "<group>"; };
 		924F7CE728FD6823003E043E /* KullanıcıProfilController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KullanıcıProfilController.swift"; sourceTree = "<group>"; };
 		924F7CEA28FD7A94003E043E /* KullanıcıProfilHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KullanıcıProfilHeader.swift"; sourceTree = "<group>"; };
@@ -58,7 +60,7 @@
 		92B6F18C28F874DC00CDAF7A /* deneme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = deneme.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92B6F18F28F874DC00CDAF7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92B6F19128F874DC00CDAF7A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		92B6F19328F874DC00CDAF7A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		92B6F19328F874DC00CDAF7A /* KayitOlController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KayitOlController.swift; sourceTree = "<group>"; };
 		92B6F19628F874DC00CDAF7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		92B6F19828F874E000CDAF7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92B6F19B28F874E000CDAF7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -106,6 +108,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9244A36B2902E2B700E77961 /* OturumAc */ = {
+			isa = PBXGroup;
+			children = (
+				9244A36C2902E2D500E77961 /* OturumAcController.swift */,
+			);
+			path = OturumAc;
+			sourceTree = "<group>";
+		};
 		924F7CE928FD7A7D003E043E /* KullanıcıProfil */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,13 +156,14 @@
 		92B6F18E28F874DC00CDAF7A /* deneme */ = {
 			isa = PBXGroup;
 			children = (
+				9244A36B2902E2B700E77961 /* OturumAc */,
 				924F7CEC28FD817F003E043E /* Modal */,
 				924F7CE928FD7A7D003E043E /* KullanıcıProfil */,
 				92E14C6928F97E060072069F /* UIColor */,
 				92B6F18F28F874DC00CDAF7A /* AppDelegate.swift */,
 				924F7CE428FD679E003E043E /* AnaTabBarController.swift */,
 				92B6F19128F874DC00CDAF7A /* SceneDelegate.swift */,
-				92B6F19328F874DC00CDAF7A /* ViewController.swift */,
+				92B6F19328F874DC00CDAF7A /* KayitOlController.swift */,
 				92B6F19528F874DC00CDAF7A /* Main.storyboard */,
 				92B6F19828F874E000CDAF7A /* Assets.xcassets */,
 				92B6F19A28F874E000CDAF7A /* LaunchScreen.storyboard */,
@@ -335,9 +346,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9244A36D2902E2D500E77961 /* OturumAcController.swift in Sources */,
 				924F7CEB28FD7A94003E043E /* KullanıcıProfilHeader.swift in Sources */,
 				924F7CE828FD6823003E043E /* KullanıcıProfilController.swift in Sources */,
-				92B6F19428F874DC00CDAF7A /* ViewController.swift in Sources */,
+				92B6F19428F874DC00CDAF7A /* KayitOlController.swift in Sources */,
 				924F7CE528FD679F003E043E /* AnaTabBarController.swift in Sources */,
 				92E14C6B28F97E280072069F /* UIColor.swift in Sources */,
 				92B6F19028F874DC00CDAF7A /* AppDelegate.swift in Sources */,

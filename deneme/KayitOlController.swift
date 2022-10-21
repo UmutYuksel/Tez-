@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  KayitOlController.swift
 //  deneme
 //
 //  Created by Umut Yüksel on 13.10.2022.
@@ -12,7 +12,7 @@ import JGProgressHUD
 import FirebaseStorage
 import FirebaseFirestore
 
-class ViewController: UIViewController {
+class KayitOlController: UIViewController {
     
     let btnFotografEkle : UIButton = {
         
@@ -168,10 +168,25 @@ class ViewController: UIViewController {
         basariliHud.dismiss(afterDelay: 0.5)
     }
     
+    let btnHesabimVar : UIButton = {
+        let btn = UIButton(type: .system)
+        let attrBaslik = NSMutableAttributedString(string: "Zaten Bir Hesabınız Var Mı?",attributes: [.font : UIFont.systemFont(ofSize: 16),.foregroundColor : UIColor.lightGray])
+        attrBaslik.append(NSMutableAttributedString(string: " Oturum Aç.",attributes: [.font : UIFont.boldSystemFont(ofSize: 16), .foregroundColor : UIColor.rgbDonustur(red: 20, green: 155, blue: 235)]))
+        btn.setAttributedTitle(attrBaslik, for: .normal)
+        btn.addTarget(self, action: #selector(btnHesabimVarPressed), for: .touchUpInside)
+        
+        return btn
+    }()
+    
+    @objc fileprivate func btnHesabimVarPressed() {
+        navigationController?.popViewController(animated: true)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
+        view.addSubview(btnHesabimVar)
+        btnHesabimVar.anchor(top: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 0, height: 60)
+        view.backgroundColor = .white
+        navigationController?.isNavigationBarHidden = true
         view.addSubview(btnFotografEkle)
         
         btnFotografEkle.anchor(top: view.safeAreaLayoutGuide.topAnchor, bottom: nil, leading: nil, trailing: nil, paddingTop: 40, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 150, height: 150)
@@ -229,7 +244,7 @@ extension UIView {
     }
 }
 
-extension ViewController : UIImagePickerControllerDelegate , UINavigationControllerDelegate {
+extension KayitOlController : UIImagePickerControllerDelegate , UINavigationControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
