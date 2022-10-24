@@ -144,14 +144,19 @@ class KayitOlController: UIViewController {
                             print("Kullanıcı Verileri FireStore'a Kaydedildi")
                             hud.dismiss(animated: true)
                             self.gorunumuDüzelt()
+                            let keyWindow = UIApplication.shared.connectedScenes.filter({$0.activationState == .foregroundActive})
+                                .map({$0 as? UIWindowScene})
+                                .compactMap({$0})
+                                .first?.windows
+                                .filter({$0.isKeyWindow}).first
+                            guard let anaTabBarController = keyWindow?.rootViewController as? AnaTabBarController else { return }
+                            anaTabBarController.gorunumuOlustur() // KullanıcıProfilContollera Gidilir
+                            self.dismiss(animated: true, completion: nil) // Oturum Açma Ekranını Kapatmak İçin
                             
                         }
                 }
                 
             }
-                                                  
-            
-            print("kullanıcı kaydı başarı ile gerçekleşti", sonuc?.user.uid)
         }
             
         }

@@ -7,15 +7,18 @@
 
 import Foundation
 import UIKit
+import Firebase
+import JGProgressHUD
 
 class OturumAcController : UIViewController {
     
     let txtEmail : UITextField = {
         let txt = UITextField()
-        txt.placeholder = "Email Adresinizi Giriniz"
+        txt.placeholder = "Email adresinizi giriniz"
         txt.backgroundColor = UIColor(white: 0, alpha: 0.05)
         txt.borderStyle = .roundedRect
         txt.font = UIFont.systemFont(ofSize: 16)
+        txt.addTarget(self, action: #selector(veriDegisimi), for: .editingChanged)
         return txt
     }()
     
@@ -26,6 +29,7 @@ class OturumAcController : UIViewController {
         txt.backgroundColor = UIColor(white: 0, alpha: 0.05)
         txt.borderStyle = .roundedRect
         txt.font = UIFont.systemFont(ofSize: 16)
+        txt.addTarget(self, action: #selector(veriDegisimi), for: .editingChanged)
         return txt
     }()
     
@@ -37,8 +41,49 @@ class OturumAcController : UIViewController {
         btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         btn.setTitleColor(.white, for: .normal)
         btn.isEnabled = false
+        btn.addTarget(self, action: #selector(btnGirisYapPressed), for: .touchUpInside)
         return btn
     }()
+    
+    @objc fileprivate func btnGirisYapPressed() {
+        
+        guard let emailAdresi = txtEmail.text , let parola = txtParola.text else { return }
+        
+        let hud = JGProgressHUD(style: .light)
+        hud.textLabel.text = "Oturum Açılıyor."
+        hud.show(in: self.view)
+        
+        Auth.auth().signIn(withEmail: emailAdresi, password: parola) { (sonuc, hata) in
+            
+            if let hata = hata {
+                print("Oturum Açılırken Hata Meydana Geldi",hata)
+                hud.dismiss(animated: true)
+                let basarisizHud = JGProgressHUD(style: .light)
+                basarisizHud.textLabel.text = "Oturum Açılırken Hata Meydana Geldi \(hata.localizedDescription)"
+                basarisizHud.show(in: self.view)
+                basarisizHud.dismiss(afterDelay: 2)
+                return
+            }
+            print("Kullanıcı Oturumu Açıldı",sonuc?.user.uid)
+            
+            let keyWindow = UIApplication.shared.connectedScenes.filter({$0.activationState == .foregroundActive})
+                .map({$0 as? UIWindowScene})
+                .compactMap({$0})
+                .first?.windows
+                .filter({$0.isKeyWindow}).first
+            guard let anaTabBarController = keyWindow?.rootViewController as? AnaTabBarController else { return }
+            anaTabBarController.gorunumuOlustur() // KullanıcıProfilContollera Gidilir
+            self.dismiss(animated: true, completion: nil) // Oturum Açma Ekranını Kapatmak İçin
+            
+            
+            hud.dismiss(animated: true)
+            let basariliHud = JGProgressHUD(style: .light)
+            basariliHud.textLabel.text = "Oturum Açma Başarılı"
+            basariliHud.show(in: self.view)
+            basariliHud.dismiss(afterDelay: 1)
+            
+        }
+    }
     
     let logoView : UIView = {
         let view = UIView()
@@ -56,7 +101,7 @@ class OturumAcController : UIViewController {
     let btnKayitOl : UIButton = {
         let btn = UIButton(type: .system)
         
-        let attrBaslik = NSMutableAttributedString(string: "Henüz Bir Hesabınız Yok Mu?",attributes: [.font : UIFont.systemFont(ofSize: 16),.foregroundColor : UIColor.lightGray])
+        let attrBaslik = NSMutableAttributedString(string: "Henüz bir hesabınız yok mu?",attributes: [.font : UIFont.systemFont(ofSize: 16),.foregroundColor : UIColor.lightGray])
         attrBaslik.append(NSMutableAttributedString(string: " Kayıt Ol.",attributes: [.font : UIFont.boldSystemFont(ofSize: 16), .foregroundColor : UIColor.rgbDonustur(red: 20, green: 155, blue: 235)]))
         btn.setAttributedTitle(attrBaslik, for: .normal)
             
@@ -65,6 +110,18 @@ class OturumAcController : UIViewController {
         btn.addTarget(self, action: #selector(btnKayitOlPressed), for: .touchUpInside)
         return btn
     }()
+    
+    @objc fileprivate func veriDegisimi() {
+        let formGecerliMi = (txtEmail.text?.count ?? 0) > 0 &&
+        (txtParola.text?.count ?? 0) > 0
+        if formGecerliMi {
+            btnGirisYap.isEnabled = true
+            btnGirisYap.backgroundColor = UIColor.rgbDonustur(red: 20, green: 155, blue: 235)
+        } else {
+            btnGirisYap.isEnabled = false
+            btnGirisYap.backgroundColor = UIColor.rgbDonustur(red: 150, green: 205, blue: 245)
+        }
+    }
     
     @objc fileprivate func btnKayitOlPressed() {
         let kayitOlController = KayitOlController()

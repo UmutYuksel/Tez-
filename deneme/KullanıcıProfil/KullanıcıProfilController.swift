@@ -33,7 +33,12 @@ class KullanıcıProfilController : UICollectionViewController {
             
             guard let _ = Auth.auth().currentUser?.uid else { return }
             do {
+                //Oturum Kapatma
                 try Auth.auth().signOut()
+                let oturumAcController = OturumAcController()
+                let navController = UINavigationController(rootViewController: oturumAcController)
+                navController.modalPresentationStyle = .fullScreen
+                self.present(navController, animated: true, completion: nil)
             } catch let oturumuKapatmaHatasi {
                 print("Oturumu Kapatırken hata oldu",oturumuKapatmaHatasi)
             }

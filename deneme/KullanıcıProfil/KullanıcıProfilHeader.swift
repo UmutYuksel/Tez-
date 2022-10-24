@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import Firebase
 import SDWebImage
+import FirebaseFirestore
 
 class KullanıcıProfilHeader : UICollectionViewCell {
     var gecerliKullanici : Kullanici? {
