@@ -13,6 +13,9 @@
 		924F7CE828FD6823003E043E /* KullanıcıProfilController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924F7CE728FD6823003E043E /* KullanıcıProfilController.swift */; };
 		924F7CEB28FD7A94003E043E /* KullanıcıProfilHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924F7CEA28FD7A94003E043E /* KullanıcıProfilHeader.swift */; };
 		924F7CEE28FD818F003E043E /* Kullanıcı.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924F7CED28FD818F003E043E /* Kullanıcı.swift */; };
+		92626D36290994CF00C19682 /* FotografSeciciHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92626D35290994CF00C19682 /* FotografSeciciHeader.swift */; };
+		92626D3829099CFE00C19682 /* FotografPaylasController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92626D3729099CFE00C19682 /* FotografPaylasController.swift */; };
+		929DCC1B29098F1300AC88FC /* FotografSeciciCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929DCC1A29098F1300AC88FC /* FotografSeciciCell.swift */; };
 		92B6F19028F874DC00CDAF7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B6F18F28F874DC00CDAF7A /* AppDelegate.swift */; };
 		92B6F19228F874DC00CDAF7A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B6F19128F874DC00CDAF7A /* SceneDelegate.swift */; };
 		92B6F19428F874DC00CDAF7A /* KayitOlController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B6F19328F874DC00CDAF7A /* KayitOlController.swift */; };
@@ -59,6 +62,9 @@
 		924F7CE728FD6823003E043E /* KullanıcıProfilController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KullanıcıProfilController.swift"; sourceTree = "<group>"; };
 		924F7CEA28FD7A94003E043E /* KullanıcıProfilHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KullanıcıProfilHeader.swift"; sourceTree = "<group>"; };
 		924F7CED28FD818F003E043E /* Kullanıcı.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kullanıcı.swift"; sourceTree = "<group>"; };
+		92626D35290994CF00C19682 /* FotografSeciciHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FotografSeciciHeader.swift; sourceTree = "<group>"; };
+		92626D3729099CFE00C19682 /* FotografPaylasController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FotografPaylasController.swift; sourceTree = "<group>"; };
+		929DCC1A29098F1300AC88FC /* FotografSeciciCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FotografSeciciCell.swift; sourceTree = "<group>"; };
 		92B6F18C28F874DC00CDAF7A /* deneme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = deneme.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92B6F18F28F874DC00CDAF7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92B6F19128F874DC00CDAF7A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -122,6 +128,9 @@
 			isa = PBXGroup;
 			children = (
 				924B0B522906E86100B161BC /* FotografSeciciController.swift */,
+				929DCC1A29098F1300AC88FC /* FotografSeciciCell.swift */,
+				92626D35290994CF00C19682 /* FotografSeciciHeader.swift */,
+				92626D3729099CFE00C19682 /* FotografPaylasController.swift */,
 			);
 			path = FotografEkle;
 			sourceTree = "<group>";
@@ -358,6 +367,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9244A36D2902E2D500E77961 /* OturumAcController.swift in Sources */,
+				929DCC1B29098F1300AC88FC /* FotografSeciciCell.swift in Sources */,
 				924B0B532906E86100B161BC /* FotografSeciciController.swift in Sources */,
 				924F7CEB28FD7A94003E043E /* KullanıcıProfilHeader.swift in Sources */,
 				924F7CE828FD6823003E043E /* KullanıcıProfilController.swift in Sources */,
@@ -366,6 +376,8 @@
 				92E14C6B28F97E280072069F /* UIColor.swift in Sources */,
 				92B6F19028F874DC00CDAF7A /* AppDelegate.swift in Sources */,
 				924F7CEE28FD818F003E043E /* Kullanıcı.swift in Sources */,
+				92626D3829099CFE00C19682 /* FotografPaylasController.swift in Sources */,
+				92626D36290994CF00C19682 /* FotografSeciciHeader.swift in Sources */,
 				92B6F19228F874DC00CDAF7A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

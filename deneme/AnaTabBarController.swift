@@ -90,7 +90,7 @@ extension AnaTabBarController : UITabBarControllerDelegate {
         guard let index = viewControllers?.firstIndex(of: viewController) else { return true}
         if index == 2 {
             
-            let layout = UICollectionViewLayout()
+            let layout = UICollectionViewFlowLayout()
             let fotografSeciciController = FotografSeciciController(collectionViewLayout: layout)
             let navController = UINavigationController(rootViewController: fotografSeciciController)
             navController.modalPresentationStyle = .fullScreen
