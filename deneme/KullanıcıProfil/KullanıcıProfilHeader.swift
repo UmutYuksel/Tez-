@@ -16,7 +16,7 @@ class KullanıcıProfilHeader : UICollectionViewCell {
         didSet{
             guard let url = URL(string: gecerliKullanici?.profilGoruntuURL ?? "") else { return }
             imgProfilGoruntu.sd_setImage(with: url, completed: nil)
-            lbnKullaniciAdi.text = gecerliKullanici?.kullaniciAdi
+            lblKullaniciAdi.text = gecerliKullanici?.kullaniciAdi
         }
     }
         let btnProfilDuzenle : UIButton = {
@@ -57,10 +57,11 @@ class KullanıcıProfilHeader : UICollectionViewCell {
             return lbl
         }()
     
-        let lbnKullaniciAdi : UILabel = {
-            let lbn = UILabel()
-            lbn.font = UIFont.boldSystemFont(ofSize: 15)
-            return lbn
+        let lblKullaniciAdi : UILabel = {
+            let lbl = UILabel()
+            lbl.text = "KullanıcıAdı"
+            lbl.font = UIFont.boldSystemFont(ofSize: 15)
+            return lbl
         }()
     
         let btnGrid : UIButton = {
@@ -96,8 +97,8 @@ class KullanıcıProfilHeader : UICollectionViewCell {
         imgProfilGoruntu.clipsToBounds = true
         toolbarOlustur()
         
-        addSubview(lbnKullaniciAdi)
-        lbnKullaniciAdi.anchor(top: imgProfilGoruntu.bottomAnchor, bottom: btnGrid.topAnchor, leading: leadingAnchor, trailing: trailingAnchor, paddingTop: 5, paddingBottom: 0, paddingLeft: 15, paddingRight: 15, width: 0, height: 0)
+        addSubview(lblKullaniciAdi)
+        lblKullaniciAdi.anchor(top: imgProfilGoruntu.bottomAnchor, bottom: btnGrid.topAnchor, leading: leadingAnchor, trailing: trailingAnchor, paddingTop: 5, paddingBottom: 0, paddingLeft: 15, paddingRight: 15, width: 0, height: 0)
         
         kullaniciDurumBilgisiGoster()
         addSubview(btnProfilDuzenle)

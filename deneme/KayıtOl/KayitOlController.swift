@@ -17,7 +17,7 @@ class KayitOlController: UIViewController {
     let btnFotografEkle : UIButton = {
         
         let btn = UIButton(type: .custom)
-        btn.setImage(UIImage(named: "instagram.png"), for: .normal)
+        btn.setImage(UIImage(named: "add-image.png"), for: .normal)
         btn.addTarget(self, action: #selector(btnFotografEklePressed), for: .touchUpInside)
         return btn
     }()
@@ -161,7 +161,7 @@ class KayitOlController: UIViewController {
             
         }
     fileprivate func gorunumuDüzelt() {
-        self.btnFotografEkle.setImage(UIImage(named: "instagram.png"), for: .normal)
+        self.btnFotografEkle.setImage(UIImage(named: "add-image.png"), for: .normal)
         self.btnFotografEkle.layer.borderColor = UIColor.clear.cgColor
         self.btnFotografEkle.layer.borderWidth = 0
         self.txtEmail.text = ""

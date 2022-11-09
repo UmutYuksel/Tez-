@@ -25,6 +25,10 @@
 		92B6F1A728F874E100CDAF7A /* denemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B6F1A628F874E100CDAF7A /* denemeTests.swift */; };
 		92B6F1B128F874E100CDAF7A /* denemeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B6F1B028F874E100CDAF7A /* denemeUITests.swift */; };
 		92B6F1B328F874E100CDAF7A /* denemeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B6F1B228F874E100CDAF7A /* denemeUITestsLaunchTests.swift */; };
+		92C42BEE290C0198008F22E8 /* Paylasim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C42BED290C0198008F22E8 /* Paylasim.swift */; };
+		92C42BF0290C038D008F22E8 /* KullaniciPaylasimFotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C42BEF290C038D008F22E8 /* KullaniciPaylasimFotoCell.swift */; };
+		92C42BF4290C192A008F22E8 /* AnasayfaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C42BF3290C192A008F22E8 /* AnasayfaController.swift */; };
+		92C42BF6290C1A52008F22E8 /* AnaPaylasimCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C42BF5290C1A52008F22E8 /* AnaPaylasimCell.swift */; };
 		92E14C6B28F97E280072069F /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E14C6A28F97E280072069F /* UIColor.swift */; };
 		92E14C6D28F98E9E0072069F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92E14C6C28F98E9D0072069F /* GoogleService-Info.plist */; };
 		92E14C7C28F9AB9D0072069F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 92E14C7B28F9AB9D0072069F /* FirebaseAnalytics */; };
@@ -78,6 +82,10 @@
 		92B6F1AC28F874E100CDAF7A /* denemeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = denemeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92B6F1B028F874E100CDAF7A /* denemeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = denemeUITests.swift; sourceTree = "<group>"; };
 		92B6F1B228F874E100CDAF7A /* denemeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = denemeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		92C42BED290C0198008F22E8 /* Paylasim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paylasim.swift; sourceTree = "<group>"; };
+		92C42BEF290C038D008F22E8 /* KullaniciPaylasimFotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KullaniciPaylasimFotoCell.swift; sourceTree = "<group>"; };
+		92C42BF3290C192A008F22E8 /* AnasayfaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnasayfaController.swift; sourceTree = "<group>"; };
+		92C42BF5290C1A52008F22E8 /* AnaPaylasimCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnaPaylasimCell.swift; sourceTree = "<group>"; };
 		92E14C6A28F97E280072069F /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		92E14C6C28F98E9D0072069F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -140,6 +148,7 @@
 			children = (
 				924F7CEA28FD7A94003E043E /* KullanıcıProfilHeader.swift */,
 				924F7CE728FD6823003E043E /* KullanıcıProfilController.swift */,
+				92C42BEF290C038D008F22E8 /* KullaniciPaylasimFotoCell.swift */,
 			);
 			path = "KullanıcıProfil";
 			sourceTree = "<group>";
@@ -148,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				924F7CED28FD818F003E043E /* Kullanıcı.swift */,
+				92C42BED290C0198008F22E8 /* Paylasim.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -175,6 +185,8 @@
 		92B6F18E28F874DC00CDAF7A /* deneme */ = {
 			isa = PBXGroup;
 			children = (
+				92C42BF2290C1911008F22E8 /* AnaSayfa */,
+				92C42BF1290C18F7008F22E8 /* KayıtOl */,
 				924B0B512906E85000B161BC /* FotografEkle */,
 				9244A36B2902E2B700E77961 /* OturumAc */,
 				924F7CEC28FD817F003E043E /* Modal */,
@@ -183,7 +195,6 @@
 				92B6F18F28F874DC00CDAF7A /* AppDelegate.swift */,
 				924F7CE428FD679E003E043E /* AnaTabBarController.swift */,
 				92B6F19128F874DC00CDAF7A /* SceneDelegate.swift */,
-				92B6F19328F874DC00CDAF7A /* KayitOlController.swift */,
 				92B6F19528F874DC00CDAF7A /* Main.storyboard */,
 				92B6F19828F874E000CDAF7A /* Assets.xcassets */,
 				92B6F19A28F874E000CDAF7A /* LaunchScreen.storyboard */,
@@ -208,6 +219,23 @@
 				92B6F1B228F874E100CDAF7A /* denemeUITestsLaunchTests.swift */,
 			);
 			path = denemeUITests;
+			sourceTree = "<group>";
+		};
+		92C42BF1290C18F7008F22E8 /* KayıtOl */ = {
+			isa = PBXGroup;
+			children = (
+				92B6F19328F874DC00CDAF7A /* KayitOlController.swift */,
+			);
+			path = "KayıtOl";
+			sourceTree = "<group>";
+		};
+		92C42BF2290C1911008F22E8 /* AnaSayfa */ = {
+			isa = PBXGroup;
+			children = (
+				92C42BF3290C192A008F22E8 /* AnasayfaController.swift */,
+				92C42BF5290C1A52008F22E8 /* AnaPaylasimCell.swift */,
+			);
+			path = AnaSayfa;
 			sourceTree = "<group>";
 		};
 		92E14C6928F97E060072069F /* UIColor */ = {
@@ -377,8 +405,12 @@
 				92B6F19028F874DC00CDAF7A /* AppDelegate.swift in Sources */,
 				924F7CEE28FD818F003E043E /* Kullanıcı.swift in Sources */,
 				92626D3829099CFE00C19682 /* FotografPaylasController.swift in Sources */,
+				92C42BF4290C192A008F22E8 /* AnasayfaController.swift in Sources */,
+				92C42BF0290C038D008F22E8 /* KullaniciPaylasimFotoCell.swift in Sources */,
+				92C42BEE290C0198008F22E8 /* Paylasim.swift in Sources */,
 				92626D36290994CF00C19682 /* FotografSeciciHeader.swift in Sources */,
 				92B6F19228F874DC00CDAF7A /* SceneDelegate.swift in Sources */,
+				92C42BF6290C1A52008F22E8 /* AnaPaylasimCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

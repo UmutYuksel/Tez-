@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Firebase
+import FirebaseStorage
 
 struct Kullanici {
     
@@ -14,7 +16,7 @@ struct Kullanici {
     let profilGoruntuURL : String
     init(kullaniciVerisi : [String : Any]) {
         
-        self.kullaniciAdi = kullaniciVerisi["KullaniciAdi"] as? String ?? ""
+        self.kullaniciAdi = kullaniciVerisi["KullaniciAdi "] as? String ?? ""
         self.kullaniciID = kullaniciVerisi["KullaniciID"] as? String ?? ""
         self.profilGoruntuURL = kullaniciVerisi["ProfilGoruntuUrl"] as? String ?? ""
     }

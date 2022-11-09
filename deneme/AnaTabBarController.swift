@@ -33,7 +33,7 @@ class AnaTabBarController : UITabBarController {
     
     func gorunumuOlustur() {
         
-        let anaNavController = navControllerOlustur(rootViewController: KullanıcıProfilController(collectionViewLayout: UICollectionViewFlowLayout()))
+        let anaNavController = navControllerOlustur(rootViewController: AnasayfaController(collectionViewLayout: UICollectionViewFlowLayout()))
         let araNavController = araControllerOlustur()
         let ekleNavController = ekleControllerOlustur()
         let likeNavController = likeControllerOlustur()

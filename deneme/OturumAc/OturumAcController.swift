@@ -88,7 +88,7 @@ class OturumAcController : UIViewController {
     let logoView : UIView = {
         let view = UIView()
         let imgLogo = UIImageView()
-        imgLogo.image = UIImage(named: "instagram-isim.png")
+        imgLogo.image = UIImage(named: "food-c.png")
         view.addSubview(imgLogo)
         imgLogo.contentMode = .scaleAspectFill
         imgLogo.anchor(top: nil, bottom: nil, leading: nil, trailing: nil, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 200, height: 50)

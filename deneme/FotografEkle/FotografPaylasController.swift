@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import JGProgressHUD
+import Firebase
+import FirebaseStorage
 
 class FotografPaylasController : UIViewController {
     var secilenFotograf : UIImage? {
@@ -52,6 +55,64 @@ class FotografPaylasController : UIViewController {
     }
     
     @objc fileprivate func btnPaylasPressed() {
+        navigationItem.rightBarButtonItem?.isEnabled = false
         
+        let hud = JGProgressHUD(style: .light)
+        hud.textLabel.text = "Paylaşım Yükleniyor"
+        hud.show(in: self.view)
+        
+        let fotografAdi = UUID().uuidString
+        guard let paylasimFotograf = secilenFotograf else { return }
+        let fotografData = paylasimFotograf.jpegData(compressionQuality: 0.8) ?? Data()
+        
+        let ref = Storage.storage().reference(withPath: "/Paylasimlar/\(fotografAdi)")
+        
+        ref.putData(fotografData,metadata:nil) { (_ , hata) in
+            if let hata = hata {
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
+                print("Fotoğraf Kaydedilemedi",hata)
+                hud.textLabel.text = "Fotoğraf Yüklenirken Hata Oldu"
+                hud.dismiss(afterDelay: 2)
+                return
+            }
+            print("Paylaşılan Fotoğraf Başarı İle Upload Edildi")
+            ref.downloadURL { (url,hata) in
+                hud.textLabel.text = "Fotoğraf Yüklendi"
+                hud.dismiss(afterDelay: 2)
+                if let hata = hata {
+                    print("Fotoğrafın URL Adresi Alınamadı",hata)
+                    self.navigationItem.rightBarButtonItem?.isEnabled = true
+                }
+                print("Upload Edilen Fotoğrafın URL Adresi : \(url?.absoluteString)")
+                if let url = url {
+                    self.paylasimKaydetFS(goruntuURL: url.absoluteString)
+                }
+            }
+        }
+        
+    }
+    fileprivate func paylasimKaydetFS(goruntuURL : String) {
+        guard let paylasimFotograf = secilenFotograf else { return }
+        guard let mesaj = txtMesaj.text,
+              mesaj.trimmingCharacters(in: .whitespacesAndNewlines).count > 0 else { return }
+        
+        
+        guard let gecerliKullaniciID = Auth.auth().currentUser?.uid else { return }
+        let eklenecekVeri = ["KullaniciID" : gecerliKullaniciID,
+                             "PaylasimGoruntuURL": goruntuURL,
+                             "Mesaj" : mesaj,
+                             "GoruntuGenislik" : paylasimFotograf.size.width,
+                             "GoruntuYukseklik" : paylasimFotograf.size.height,
+                             "PaylasimTarihi" : Timestamp(date: Date())] as [String : Any]
+        var ref : DocumentReference? = nil
+        ref = Firestore.firestore().collection("Paylasimlar").document(gecerliKullaniciID).collection("Fotograf_Paylasimlari").addDocument(data: eklenecekVeri, completion: { (hata) in
+            if let hata = hata {
+                print("Paylaşım Kaydedilirken Hata Meydana Geldi",hata)
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
+                return
+            }
+            print("Paylaşım Başarı İle Kaydedildi Ve Paylaşım Döküman ID'si :",ref?.documentID)
+            self.dismiss(animated: true,completion: nil)
+        })
     }
 }
