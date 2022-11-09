@@ -29,6 +29,7 @@ class KullanıcıProfilController : UICollectionViewController {
     fileprivate func paylasimlariGetirFS() {
         
         guard let gecerliKullaniciID = Auth.auth().currentUser?.uid else { return }
+        guard let gecerliKullanici = gecerliKullanici else { return }
         Firestore.firestore().collection("Paylasimlar").document(gecerliKullaniciID)
             .collection("Fotograf_Paylasimlari").order(by: "PaylasimTarihi",descending: false)
         .addSnapshotListener{ (QuerySnapshot, hata) in
@@ -40,7 +41,7 @@ class KullanıcıProfilController : UICollectionViewController {
             QuerySnapshot?.documentChanges.forEach({ (degisiklik) in
                 if degisiklik.type == .added {
                     let paylasimVerisi = degisiklik.document.data() // Döküman Verisine Ulaşmayı Sağlar
-                   let paylasim = Paylasim(sozlukVerisi: paylasimVerisi)
+                   let paylasim = Paylasim(kullanici: gecerliKullanici, sozlukVerisi: paylasimVerisi)
                     self.paylasimlar.append(paylasim)
                 }
             })

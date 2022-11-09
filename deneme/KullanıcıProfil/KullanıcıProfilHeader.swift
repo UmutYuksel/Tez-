@@ -59,7 +59,7 @@ class KullanıcıProfilHeader : UICollectionViewCell {
     
         let lblKullaniciAdi : UILabel = {
             let lbl = UILabel()
-            lbl.text = "KullanıcıAdı"
+            lbl.text = "Kullanıcı Adı"
             lbl.font = UIFont.boldSystemFont(ofSize: 15)
             return lbl
         }()

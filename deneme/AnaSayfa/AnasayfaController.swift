@@ -18,7 +18,7 @@ class AnasayfaController : UICollectionViewController {
         collectionView.backgroundColor = .white
         collectionView.register(AnaPaylasimCell.self, forCellWithReuseIdentifier: hucreID)
         navBarDuzenle()
-        paylasimlariGetir()
+        kullaniciyiGetir()
     }
     
     var paylasimlar = [Paylasim]()
@@ -26,6 +26,7 @@ class AnasayfaController : UICollectionViewController {
         
         paylasimlar.removeAll()
         guard let gecerliKullaniciID = Auth.auth().currentUser?.uid else { return }
+        guard let gecerliKullanici = gecerliKullanici else { return }
         Firestore.firestore().collection("Paylasimlar").document(gecerliKullaniciID)
             .collection("Fotograf_Paylasimlari").order(by: "PaylasimTarihi", descending: false)
             .addSnapshotListener { querySnapshot, hata in
@@ -36,7 +37,7 @@ class AnasayfaController : UICollectionViewController {
                 querySnapshot?.documentChanges.forEach({ (degisiklik) in
                     if degisiklik.type == .added {
                         let paylasimVerisi = degisiklik.document.data()
-                        let paylasim = Paylasim(sozlukVerisi: paylasimVerisi)
+                        let paylasim = Paylasim(kullanici : gecerliKullanici ,sozlukVerisi: paylasimVerisi)
                         self.paylasimlar.append(paylasim)
                     }
                 })
@@ -59,8 +60,23 @@ class AnasayfaController : UICollectionViewController {
         
         let hucre = collectionView.dequeueReusableCell(withReuseIdentifier: hucreID, for: indexPath) as! AnaPaylasimCell
         hucre.paylasim = paylasimlar[indexPath.row]
-        hucre.backgroundColor = .red
         return hucre
+    }
+    var gecerliKullanici : Kullanici?
+    
+    fileprivate func kullaniciyiGetir() {
+        guard let gecerliKullaniciID = Auth.auth().currentUser?.uid else { return }
+        
+        Firestore.firestore().collection("Kullanicilar").document(gecerliKullaniciID).getDocument { snapshot, hata in
+            
+            if let hata = hata {
+                print("Kullanıcı Bilgisi Getirilemedi",hata)
+                return
+            }
+            guard let kullaniciVerisi = snapshot?.data() else { return }
+            self.gecerliKullanici = Kullanici(kullaniciVerisi: kullaniciVerisi)
+            self.paylasimlariGetir()
+        }
     }
 }
 
@@ -70,6 +86,7 @@ extension AnasayfaController : UICollectionViewDelegateFlowLayout {
         var yukseklik : CGFloat = 55
         yukseklik += view.frame.width
         yukseklik += 50
+        yukseklik += 70
         return CGSize(width: view.frame.width, height: yukseklik)
     }
 }

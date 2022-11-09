@@ -15,8 +15,11 @@ struct Paylasim {
     let kullaniciID : String?
     let mesaj : String?
     let paylasimTarihi : Timestamp?
+    let kullanici : Kullanici
     
-    init(sozlukVerisi : [String : Any]) {
+    
+    init(kullanici : Kullanici, sozlukVerisi : [String : Any]) {
+        self.kullanici = kullanici
         self.paylasimGoruntuURL = sozlukVerisi["PaylasimGoruntuURL"] as? String
         self.goruntuGenislik = sozlukVerisi["GoruntuGenislik"] as? Double
         self.goruntuYukseklik = sozlukVerisi["GoruntuYukseklik"] as? Double

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class AnaPaylasimCell : UICollectionViewCell {
     
@@ -14,23 +15,49 @@ class AnaPaylasimCell : UICollectionViewCell {
             guard let url = paylasim?.paylasimGoruntuURL
                     , let goruntuURL = URL(string: url) else { return }
             imgPaylasimFoto.sd_setImage(with: goruntuURL,completed: nil)
+            lblKullaniciAdi.text = paylasim?.kullanici.kullaniciAdi
+            
+            guard let pUrl = paylasim?.kullanici.profilGoruntuURL,
+                  let profilGoruntuURL = URL(string: pUrl) else {return}
+            imgKullaniciProfilFoto.sd_setImage(with: profilGoruntuURL, completed: nil)
+            
+            attrPaylasimMesajıOlustur()
             
         }
     }
+    fileprivate func attrPaylasimMesajıOlustur() {
+        guard let paylasim = self.paylasim else { return }
+        let attrText = NSMutableAttributedString(string: paylasim.kullanici.kullaniciAdi ,attributes: [.font : UIFont.boldSystemFont(ofSize: 14)])
+        attrText.append(NSAttributedString(string: "\(paylasim.mesaj ?? "Veri Yok")",attributes: [.font : UIFont.systemFont(ofSize: 14)]))
+        attrText.append(NSAttributedString(string: "\n\n",attributes: [.font : UIFont.systemFont(ofSize: 4)]))
+        attrText.append(NSAttributedString(string: "1 Hafta Önce",attributes: [.font : UIFont.systemFont(ofSize: 14), .foregroundColor : UIColor.gray]))
+        
+        lblDescription.attributedText = attrText
+    }
+    let lblDescription : UILabel = {
+        let lbl = UILabel()
+        lbl.numberOfLines = 0
+        return lbl
+    }()
+    let btnBookmark : UIButton = {
+        let btn = UIButton(type: .system)
+        btn.setImage(UIImage(named: "bookmark.png")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        return btn
+    }()
     let btnLike : UIButton = {
         let btn = UIButton(type: .system)
-        btn.setImage(UIImage(named: "heart.png")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        btn.setImage(UIImage(named: "heart24.png")?.withRenderingMode(.alwaysOriginal),for: .normal)
         return btn
     }()
     
     let BtnSentMessage :  UIButton = {
         let btn = UIButton(type: .system)
-        btn.setImage(UIImage(named: "sent.png")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        btn.setImage(UIImage(named: "sent 1.png")?.withRenderingMode(.alwaysOriginal), for: .normal)
         return btn
     }()
     let BtnComment : UIButton =  {
         let btn = UIButton(type: .system)
-        btn.setImage(UIImage(named: "comment.png")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        btn.setImage(UIImage(named: "comment 1.png")?.withRenderingMode(.alwaysOriginal), for: .normal)
         return btn
     }()
     let btnSecenekler : UIButton = {
@@ -63,7 +90,7 @@ class AnaPaylasimCell : UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .gray
+        backgroundColor = .white
         addSubview(imgKullaniciProfilFoto)
         addSubview(lblKullaniciAdi)
         addSubview(btnSecenekler)
@@ -76,17 +103,25 @@ class AnaPaylasimCell : UICollectionViewCell {
         
         btnSecenekler.anchor(top: topAnchor, bottom: imgPaylasimFoto.topAnchor, leading: nil, trailing: trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 45, height: 0)
         
-        imgPaylasimFoto.anchor(top: imgKullaniciProfilFoto.bottomAnchor, bottom: nil, leading: leadingAnchor, trailing: trailingAnchor, paddingTop: 0, paddingBottom: 8, paddingLeft: 0, paddingRight: 0, width: 0, height: 0)
+        imgPaylasimFoto.anchor(top: imgKullaniciProfilFoto.bottomAnchor, bottom: nil, leading: leadingAnchor, trailing: trailingAnchor, paddingTop: 5, paddingBottom: 8, paddingLeft: 0, paddingRight: 0, width: 0, height: 0)
         
         _ = imgPaylasimFoto.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1).isActive = true
+        etkilesimButonlarıOlustur()
         
         
     }
+   
     fileprivate func etkilesimButonlarıOlustur() {
         let stackView = UIStackView(arrangedSubviews: [btnLike,BtnComment,BtnSentMessage])
         stackView.distribution = .fillEqually
         addSubview(stackView)
         stackView.anchor(top: imgPaylasimFoto.bottomAnchor, bottom: nil, leading: leadingAnchor, trailing: nil, paddingTop: 0, paddingBottom: 0, paddingLeft: 8, paddingRight: 0, width: 120, height: 50)
+        
+        addSubview(btnBookmark)
+        btnBookmark.anchor(top: imgPaylasimFoto.bottomAnchor, bottom: nil, leading: nil, trailing: trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 40, height: 50)
+        
+        addSubview(lblDescription)
+        lblDescription.anchor(top: btnLike.bottomAnchor, bottom: bottomAnchor, leading: leadingAnchor, trailing: trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeft: 8, paddingRight: -8, width: 0, height: 0)
     }
     
     required init?(coder: NSCoder) {
