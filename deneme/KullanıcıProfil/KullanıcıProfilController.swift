@@ -12,6 +12,8 @@ import FirebaseFirestore
 
 class KullanıcıProfilController : UICollectionViewController {
     
+    var kullaniciID : String?
+    
     let paylasimHucreID = "paylaşımHücreID"
     
     override func viewDidLoad() {
@@ -28,8 +30,10 @@ class KullanıcıProfilController : UICollectionViewController {
     
     fileprivate func paylasimlariGetirFS() {
         
-        guard let gecerliKullaniciID = Auth.auth().currentUser?.uid else { return }
-        guard let gecerliKullanici = gecerliKullanici else { return }
+        //guard let gecerliKullaniciID = Auth.auth().currentUser?.uid else { return }
+
+        guard let gecerliKullaniciID = self.gecerliKullanici?.kullaniciID else { return }
+        
         Firestore.firestore().collection("Paylasimlar").document(gecerliKullaniciID)
             .collection("Fotograf_Paylasimlari").order(by: "PaylasimTarihi",descending: false)
         .addSnapshotListener{ (QuerySnapshot, hata) in
@@ -41,7 +45,7 @@ class KullanıcıProfilController : UICollectionViewController {
             QuerySnapshot?.documentChanges.forEach({ (degisiklik) in
                 if degisiklik.type == .added {
                     let paylasimVerisi = degisiklik.document.data() // Döküman Verisine Ulaşmayı Sağlar
-                   let paylasim = Paylasim(kullanici: gecerliKullanici, sozlukVerisi: paylasimVerisi)
+                    let paylasim = Paylasim(kullanici: self.gecerliKullanici!, sozlukVerisi: paylasimVerisi)
                     self.paylasimlar.append(paylasim)
                 }
             })
@@ -116,7 +120,8 @@ class KullanıcıProfilController : UICollectionViewController {
     var gecerliKullanici : Kullanici?
     fileprivate func kullaniciyiGetir() {
         
-        guard let gecerliKullaniciID = Auth.auth().currentUser?.uid else { return }
+        let gecerliKullaniciID = kullaniciID ?? Auth.auth().currentUser?.uid ?? ""
+        //guard let gecerliKullaniciID = Auth.auth().currentUser?.uid else { return }
         
         
         Firestore.firestore().collection("Kullanicilar").document(gecerliKullaniciID).getDocument { (snapshot , hata ) in

@@ -34,8 +34,11 @@ class AnaTabBarController : UITabBarController {
     func gorunumuOlustur() {
         
         let anaNavController = navControllerOlustur(rootViewController: AnasayfaController(collectionViewLayout: UICollectionViewFlowLayout()))
-        let araNavController = araControllerOlustur()
+        
+        let araNavController = araControllerOlustur(rootViewController: KullanıcıAramaController(collectionViewLayout: UICollectionViewFlowLayout()))
+        
         let ekleNavController = ekleControllerOlustur()
+        
         let likeNavController = likeControllerOlustur()
         
         
@@ -62,8 +65,8 @@ class AnaTabBarController : UITabBarController {
         navController.tabBarItem.selectedImage = UIImage(named: "home-selected.png")
         return navController
     }
-    fileprivate func araControllerOlustur()-> UINavigationController {
-        let rootController = UIViewController()
+    fileprivate func araControllerOlustur(rootViewController: UIViewController = UIViewController())-> UINavigationController {
+        let rootController = rootViewController
         let navController = UINavigationController(rootViewController: rootController)
         navController.tabBarItem.image = UIImage(named: "search.png")
         navController.tabBarItem.selectedImage = UIImage(named: "search-selected.png")

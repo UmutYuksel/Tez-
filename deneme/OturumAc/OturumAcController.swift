@@ -91,7 +91,7 @@ class OturumAcController : UIViewController {
         imgLogo.image = UIImage(named: "food-c.png")
         view.addSubview(imgLogo)
         imgLogo.contentMode = .scaleAspectFill
-        imgLogo.anchor(top: nil, bottom: nil, leading: nil, trailing: nil, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 200, height: 50)
+        imgLogo.anchor(top: nil, bottom: nil, leading: nil, trailing: nil, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 75, height: 37)
         imgLogo.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         imgLogo.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         view.backgroundColor = UIColor.rgbDonustur(red: 0, green: 120, blue: 175)

@@ -14,7 +14,7 @@ struct Paylasim {
     let goruntuYukseklik : Double?
     let kullaniciID : String?
     let mesaj : String?
-    let paylasimTarihi : Timestamp?
+    let paylasimTarihi : Timestamp
     let kullanici : Kullanici
     
     
@@ -25,6 +25,6 @@ struct Paylasim {
         self.goruntuYukseklik = sozlukVerisi["GoruntuYukseklik"] as? Double
         self.kullaniciID = sozlukVerisi["KullaniciID"] as? String
         self.mesaj = sozlukVerisi["Mesaj"] as? String
-        self.paylasimTarihi = sozlukVerisi["PaylasimTarihi"] as? Timestamp
+        self.paylasimTarihi = sozlukVerisi["PaylasimTarihi"] as? Timestamp ?? Timestamp(date: Date())
     }
 }

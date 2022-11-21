@@ -91,6 +91,8 @@ class FotografPaylasController : UIViewController {
         }
         
     }
+    static let guncelleNotification = Notification.Name("PaylasimlariGuncelle")
+  
     fileprivate func paylasimKaydetFS(goruntuURL : String) {
         guard let paylasimFotograf = secilenFotograf else { return }
         guard let mesaj = txtMesaj.text,
@@ -113,6 +115,9 @@ class FotografPaylasController : UIViewController {
             }
             print("Paylaşım Başarı İle Kaydedildi Ve Paylaşım Döküman ID'si :",ref?.documentID)
             self.dismiss(animated: true,completion: nil)
+            
+            
+            NotificationCenter.default.post(name: FotografPaylasController.guncelleNotification, object: nil)
         })
     }
 }

@@ -14,22 +14,56 @@ class AnasayfaController : UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(paylasimlariYenile), name: FotografPaylasController.guncelleNotification, object: nil)
         
         collectionView.backgroundColor = .white
         collectionView.register(AnaPaylasimCell.self, forCellWithReuseIdentifier: hucreID)
         navBarDuzenle()
+        kullaniciyiGetir() // Oturumu açan Kullanıcının Paylaşımları Getirilir
+        takipEdilenKIDDegerleriGetir()
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(paylasimlariYenile), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
+    }
+    
+    @objc fileprivate func paylasimlariYenile() {
+        print("Paylaşımlar Yenileniyor")
+        paylasimlar.removeAll()
+        collectionView.reloadData()
+        takipEdilenKIDDegerleriGetir()
         kullaniciyiGetir()
     }
     
-    var paylasimlar = [Paylasim]()
-    fileprivate func paylasimlariGetir() {
+    fileprivate func takipEdilenKIDDegerleriGetir() {
+        guard let kID = Auth.auth().currentUser?.uid else { return }
         
-        paylasimlar.removeAll()
-        guard let gecerliKullaniciID = Auth.auth().currentUser?.uid else { return }
-        guard let gecerliKullanici = gecerliKullanici else { return }
-        Firestore.firestore().collection("Paylasimlar").document(gecerliKullaniciID)
+        Firestore.firestore().collection("TakipEdiyor").document(kID).addSnapshotListener { (documentsnapshot, hata)  in
+            if let hata = hata {
+                print("Paylaşımlar Getirilirken Hata Meydana Geldi : ",hata.localizedDescription)
+                return
+            }
+            guard let paylasimSozlukVerisi = documentsnapshot?.data() else { return }
+            
+            paylasimSozlukVerisi.forEach { (key,value) in
+                
+                Firestore.kullaniciyiOlustur(kullaniciID: key) { (kullanici) in
+                    self.paylasimlariGetir(kullanici: kullanici)
+                }
+            }
+        }
+    }
+    
+    var paylasimlar = [Paylasim]()
+    fileprivate func paylasimlariGetir(kullanici : Kullanici) {
+       
+       
+        Firestore.firestore().collection("Paylasimlar").document(kullanici.kullaniciID)
             .collection("Fotograf_Paylasimlari").order(by: "PaylasimTarihi", descending: false)
             .addSnapshotListener { querySnapshot, hata in
+                
+                self.collectionView.refreshControl?.endRefreshing()
+                
                 if let hata = hata {
                     print("Paylaşımlar Getirilirken Hata Oluştu",hata.localizedDescription)
                     return
@@ -37,8 +71,11 @@ class AnasayfaController : UICollectionViewController {
                 querySnapshot?.documentChanges.forEach({ (degisiklik) in
                     if degisiklik.type == .added {
                         let paylasimVerisi = degisiklik.document.data()
-                        let paylasim = Paylasim(kullanici : gecerliKullanici ,sozlukVerisi: paylasimVerisi)
+                        let paylasim = Paylasim(kullanici : kullanici ,sozlukVerisi: paylasimVerisi)
                         self.paylasimlar.append(paylasim)
+                        self.paylasimlar.sort { (p1 , p2) -> Bool in
+                            return p1.paylasimTarihi.dateValue().compare(p2.paylasimTarihi.dateValue()) == .orderedAscending
+                        }
                     }
                 })
                 self.paylasimlar.reverse()
@@ -64,10 +101,11 @@ class AnasayfaController : UICollectionViewController {
     }
     var gecerliKullanici : Kullanici?
     
-    fileprivate func kullaniciyiGetir() {
+    fileprivate func kullaniciyiGetir(kullaniciID : String = "") {
         guard let gecerliKullaniciID = Auth.auth().currentUser?.uid else { return }
+        let kID = kullaniciID == "" ? gecerliKullaniciID : kullaniciID
         
-        Firestore.firestore().collection("Kullanicilar").document(gecerliKullaniciID).getDocument { snapshot, hata in
+        Firestore.firestore().collection("Kullanicilar").document(kID).getDocument { snapshot, hata in
             
             if let hata = hata {
                 print("Kullanıcı Bilgisi Getirilemedi",hata)
@@ -75,7 +113,9 @@ class AnasayfaController : UICollectionViewController {
             }
             guard let kullaniciVerisi = snapshot?.data() else { return }
             self.gecerliKullanici = Kullanici(kullaniciVerisi: kullaniciVerisi)
-            self.paylasimlariGetir()
+            
+            guard let kullanici = self.gecerliKullanici else { return }
+            self.paylasimlariGetir(kullanici: kullanici)
         }
     }
 }
