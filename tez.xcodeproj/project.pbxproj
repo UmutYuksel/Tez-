@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		92430803292FA20B00C6C23A /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92430802292FA20B00C6C23A /* CameraController.swift */; };
+		92430805292FBA5100C6C23A /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92430804292FBA5100C6C23A /* Animation.swift */; };
+		92430807292FC9A700C6C23A /* AnimationDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92430806292FC9A700C6C23A /* AnimationDismiss.swift */; };
 		9244A36D2902E2D500E77961 /* OturumAcController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9244A36C2902E2D500E77961 /* OturumAcController.swift */; };
 		924B0B532906E86100B161BC /* FotografSeciciController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924B0B522906E86100B161BC /* FotografSeciciController.swift */; };
 		924F7CE528FD679F003E043E /* AnaTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924F7CE428FD679E003E043E /* AnaTabBarController.swift */; };
@@ -64,6 +67,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		92430802292FA20B00C6C23A /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		92430804292FBA5100C6C23A /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
+		92430806292FC9A700C6C23A /* AnimationDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationDismiss.swift; sourceTree = "<group>"; };
 		9244A36C2902E2D500E77961 /* OturumAcController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OturumAcController.swift; sourceTree = "<group>"; };
 		924B0B522906E86100B161BC /* FotografSeciciController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FotografSeciciController.swift; sourceTree = "<group>"; };
 		924F7CE428FD679E003E043E /* AnaTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnaTabBarController.swift; sourceTree = "<group>"; };
@@ -77,7 +83,7 @@
 		929721E3292BB92700AEC99A /* UzantiFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UzantiFirestore.swift; sourceTree = "<group>"; };
 		929721E5292BBE1600AEC99A /* Uzantı+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Uzantı+Date.swift"; sourceTree = "<group>"; };
 		929DCC1A29098F1300AC88FC /* FotografSeciciCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FotografSeciciCell.swift; sourceTree = "<group>"; };
-		92B6F18C28F874DC00CDAF7A /* deneme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = deneme.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		92B6F18C28F874DC00CDAF7A /* tez.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tez.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92B6F18F28F874DC00CDAF7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92B6F19128F874DC00CDAF7A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		92B6F19328F874DC00CDAF7A /* KayitOlController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KayitOlController.swift; sourceTree = "<group>"; };
@@ -85,9 +91,9 @@
 		92B6F19828F874E000CDAF7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92B6F19B28F874E000CDAF7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		92B6F19D28F874E000CDAF7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		92B6F1A228F874E100CDAF7A /* denemeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = denemeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92B6F1A228F874E100CDAF7A /* tezTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tezTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92B6F1A628F874E100CDAF7A /* denemeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = denemeTests.swift; sourceTree = "<group>"; };
-		92B6F1AC28F874E100CDAF7A /* denemeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = denemeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92B6F1AC28F874E100CDAF7A /* tezUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tezUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92B6F1B028F874E100CDAF7A /* denemeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = denemeUITests.swift; sourceTree = "<group>"; };
 		92B6F1B228F874E100CDAF7A /* denemeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = denemeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		92C42BED290C0198008F22E8 /* Paylasim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paylasim.swift; sourceTree = "<group>"; };
@@ -132,6 +138,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		92430801292FA1EF00C6C23A /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				92430802292FA20B00C6C23A /* CameraController.swift */,
+				92430804292FBA5100C6C23A /* Animation.swift */,
+				92430806292FC9A700C6C23A /* AnimationDismiss.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
 		9244A36B2902E2B700E77961 /* OturumAc */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,9 +210,9 @@
 		92B6F18D28F874DC00CDAF7A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				92B6F18C28F874DC00CDAF7A /* deneme.app */,
-				92B6F1A228F874E100CDAF7A /* denemeTests.xctest */,
-				92B6F1AC28F874E100CDAF7A /* denemeUITests.xctest */,
+				92B6F18C28F874DC00CDAF7A /* tez.app */,
+				92B6F1A228F874E100CDAF7A /* tezTests.xctest */,
+				92B6F1AC28F874E100CDAF7A /* tezUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -204,6 +220,7 @@
 		92B6F18E28F874DC00CDAF7A /* deneme */ = {
 			isa = PBXGroup;
 			children = (
+				92430801292FA1EF00C6C23A /* Camera */,
 				929721DE292B920200AEC99A /* Arama */,
 				92C42BF2290C1911008F22E8 /* AnaSayfa */,
 				92C42BF1290C18F7008F22E8 /* KayıtOl */,
@@ -269,9 +286,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		92B6F18B28F874DC00CDAF7A /* deneme */ = {
+		92B6F18B28F874DC00CDAF7A /* tez */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92B6F1B628F874E100CDAF7A /* Build configuration list for PBXNativeTarget "deneme" */;
+			buildConfigurationList = 92B6F1B628F874E100CDAF7A /* Build configuration list for PBXNativeTarget "tez" */;
 			buildPhases = (
 				92B6F18828F874DC00CDAF7A /* Sources */,
 				92B6F18928F874DC00CDAF7A /* Frameworks */,
@@ -281,7 +298,7 @@
 			);
 			dependencies = (
 			);
-			name = deneme;
+			name = tez;
 			packageProductDependencies = (
 				92E14C7B28F9AB9D0072069F /* FirebaseAnalytics */,
 				92E14C7D28F9AB9D0072069F /* FirebaseAnalyticsWithoutAdIdSupport */,
@@ -294,12 +311,12 @@
 				92E14C8D28F9AC880072069F /* JGProgressHUD */,
 			);
 			productName = deneme;
-			productReference = 92B6F18C28F874DC00CDAF7A /* deneme.app */;
+			productReference = 92B6F18C28F874DC00CDAF7A /* tez.app */;
 			productType = "com.apple.product-type.application";
 		};
-		92B6F1A128F874E100CDAF7A /* denemeTests */ = {
+		92B6F1A128F874E100CDAF7A /* tezTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92B6F1B928F874E100CDAF7A /* Build configuration list for PBXNativeTarget "denemeTests" */;
+			buildConfigurationList = 92B6F1B928F874E100CDAF7A /* Build configuration list for PBXNativeTarget "tezTests" */;
 			buildPhases = (
 				92B6F19E28F874E100CDAF7A /* Sources */,
 				92B6F19F28F874E100CDAF7A /* Frameworks */,
@@ -310,14 +327,14 @@
 			dependencies = (
 				92B6F1A428F874E100CDAF7A /* PBXTargetDependency */,
 			);
-			name = denemeTests;
+			name = tezTests;
 			productName = denemeTests;
-			productReference = 92B6F1A228F874E100CDAF7A /* denemeTests.xctest */;
+			productReference = 92B6F1A228F874E100CDAF7A /* tezTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		92B6F1AB28F874E100CDAF7A /* denemeUITests */ = {
+		92B6F1AB28F874E100CDAF7A /* tezUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92B6F1BC28F874E100CDAF7A /* Build configuration list for PBXNativeTarget "denemeUITests" */;
+			buildConfigurationList = 92B6F1BC28F874E100CDAF7A /* Build configuration list for PBXNativeTarget "tezUITests" */;
 			buildPhases = (
 				92B6F1A828F874E100CDAF7A /* Sources */,
 				92B6F1A928F874E100CDAF7A /* Frameworks */,
@@ -328,9 +345,9 @@
 			dependencies = (
 				92B6F1AE28F874E100CDAF7A /* PBXTargetDependency */,
 			);
-			name = denemeUITests;
+			name = tezUITests;
 			productName = denemeUITests;
-			productReference = 92B6F1AC28F874E100CDAF7A /* denemeUITests.xctest */;
+			productReference = 92B6F1AC28F874E100CDAF7A /* tezUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -356,7 +373,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 92B6F18728F874DC00CDAF7A /* Build configuration list for PBXProject "deneme" */;
+			buildConfigurationList = 92B6F18728F874DC00CDAF7A /* Build configuration list for PBXProject "tez" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -374,9 +391,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				92B6F18B28F874DC00CDAF7A /* deneme */,
-				92B6F1A128F874E100CDAF7A /* denemeTests */,
-				92B6F1AB28F874E100CDAF7A /* denemeUITests */,
+				92B6F18B28F874DC00CDAF7A /* tez */,
+				92B6F1A128F874E100CDAF7A /* tezTests */,
+				92B6F1AB28F874E100CDAF7A /* tezUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -418,8 +435,10 @@
 				929DCC1B29098F1300AC88FC /* FotografSeciciCell.swift in Sources */,
 				924B0B532906E86100B161BC /* FotografSeciciController.swift in Sources */,
 				924F7CEB28FD7A94003E043E /* KullanıcıProfilHeader.swift in Sources */,
+				92430805292FBA5100C6C23A /* Animation.swift in Sources */,
 				924F7CE828FD6823003E043E /* KullanıcıProfilController.swift in Sources */,
 				92B6F19428F874DC00CDAF7A /* KayitOlController.swift in Sources */,
+				92430803292FA20B00C6C23A /* CameraController.swift in Sources */,
 				924F7CE528FD679F003E043E /* AnaTabBarController.swift in Sources */,
 				92E14C6B28F97E280072069F /* UIColor.swift in Sources */,
 				929721E2292B9A0000AEC99A /* KullanıcıAramaCell.swift in Sources */,
@@ -433,6 +452,7 @@
 				92C42BEE290C0198008F22E8 /* Paylasim.swift in Sources */,
 				92626D36290994CF00C19682 /* FotografSeciciHeader.swift in Sources */,
 				929721E0292B921400AEC99A /* KullanıcıAramaController.swift in Sources */,
+				92430807292FC9A700C6C23A /* AnimationDismiss.swift in Sources */,
 				92B6F19228F874DC00CDAF7A /* SceneDelegate.swift in Sources */,
 				92C42BF6290C1A52008F22E8 /* AnaPaylasimCell.swift in Sources */,
 			);
@@ -460,12 +480,12 @@
 /* Begin PBXTargetDependency section */
 		92B6F1A428F874E100CDAF7A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 92B6F18B28F874DC00CDAF7A /* deneme */;
+			target = 92B6F18B28F874DC00CDAF7A /* tez */;
 			targetProxy = 92B6F1A328F874E100CDAF7A /* PBXContainerItemProxy */;
 		};
 		92B6F1AE28F874E100CDAF7A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 92B6F18B28F874DC00CDAF7A /* deneme */;
+			target = 92B6F18B28F874DC00CDAF7A /* tez */;
 			targetProxy = 92B6F1AD28F874E100CDAF7A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -611,6 +631,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2C2JQAY773;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = deneme/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -638,6 +659,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2C2JQAY773;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = deneme/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -673,7 +695,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/deneme.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/deneme";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tez.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/tez";
 			};
 			name = Debug;
 		};
@@ -692,7 +714,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/deneme.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/deneme";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tez.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/tez";
 			};
 			name = Release;
 		};
@@ -733,7 +755,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		92B6F18728F874DC00CDAF7A /* Build configuration list for PBXProject "deneme" */ = {
+		92B6F18728F874DC00CDAF7A /* Build configuration list for PBXProject "tez" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92B6F1B428F874E100CDAF7A /* Debug */,
@@ -742,7 +764,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92B6F1B628F874E100CDAF7A /* Build configuration list for PBXNativeTarget "deneme" */ = {
+		92B6F1B628F874E100CDAF7A /* Build configuration list for PBXNativeTarget "tez" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92B6F1B728F874E100CDAF7A /* Debug */,
@@ -751,7 +773,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92B6F1B928F874E100CDAF7A /* Build configuration list for PBXNativeTarget "denemeTests" */ = {
+		92B6F1B928F874E100CDAF7A /* Build configuration list for PBXNativeTarget "tezTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92B6F1BA28F874E100CDAF7A /* Debug */,
@@ -760,7 +782,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92B6F1BC28F874E100CDAF7A /* Build configuration list for PBXNativeTarget "denemeUITests" */ = {
+		92B6F1BC28F874E100CDAF7A /* Build configuration list for PBXNativeTarget "tezUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92B6F1BD28F874E100CDAF7A /* Debug */,

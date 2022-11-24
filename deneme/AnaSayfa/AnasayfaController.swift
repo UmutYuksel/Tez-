@@ -85,6 +85,14 @@ class AnasayfaController : UICollectionViewController {
     
     fileprivate func navBarDuzenle() {
         navigationItem.titleView = UIImageView(image: UIImage(named: "food-c.png"))
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "camera.png")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(kameraYonet))
+    }
+    
+    @objc fileprivate func kameraYonet() {
+        let cameraController = CameraController()
+        cameraController.modalPresentationStyle = .fullScreen
+        present(cameraController, animated: true, completion: nil)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
