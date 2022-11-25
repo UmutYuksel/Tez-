@@ -8,8 +8,15 @@
 import UIKit
 import Firebase
 
+protocol AnaPaylasimCellDelegate {
+    
+    func CommentPressed(paylasim : Paylasim)
+    
+}
+
 class AnaPaylasimCell : UICollectionViewCell {
     
+    var delegate : AnaPaylasimCellDelegate?
     var paylasim : Paylasim? {
         didSet {
             guard let url = paylasim?.paylasimGoruntuURL
@@ -57,11 +64,20 @@ class AnaPaylasimCell : UICollectionViewCell {
         btn.setImage(UIImage(named: "sent 1.png")?.withRenderingMode(.alwaysOriginal), for: .normal)
         return btn
     }()
-    let BtnComment : UIButton =  {
+    lazy var BtnComment : UIButton =  {
         let btn = UIButton(type: .system)
         btn.setImage(UIImage(named: "comment 1.png")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        btn.addTarget(self, action: #selector(btnCommentPressed), for:.touchUpInside)
         return btn
     }()
+    
+    @objc fileprivate func btnCommentPressed() {
+        print("Yorumlar Listeleniyor")
+        
+        guard let paylasim = self.paylasim else { return }
+        delegate?.CommentPressed(paylasim: paylasim)
+    }
+    
     let btnSecenekler : UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("•••", for: .normal)

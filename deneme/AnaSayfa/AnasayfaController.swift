@@ -71,14 +71,15 @@ class AnasayfaController : UICollectionViewController {
                 querySnapshot?.documentChanges.forEach({ (degisiklik) in
                     if degisiklik.type == .added {
                         let paylasimVerisi = degisiklik.document.data()
-                        let paylasim = Paylasim(kullanici : kullanici ,sozlukVerisi: paylasimVerisi)
+                        var paylasim = Paylasim(kullanici : kullanici ,sozlukVerisi: paylasimVerisi)
+                        paylasim.id = degisiklik.document.documentID
                         self.paylasimlar.append(paylasim)
-                        self.paylasimlar.sort { (p1 , p2) -> Bool in
-                            return p1.paylasimTarihi.dateValue().compare(p2.paylasimTarihi.dateValue()) == .orderedAscending
                         }
-                    }
                 })
                 self.paylasimlar.reverse()
+                self.paylasimlar.sort { (p1 , p2) -> Bool in
+                    return p1.paylasimTarihi.dateValue().compare(p2.paylasimTarihi.dateValue()) == .orderedDescending
+                }
                 self.collectionView.reloadData()
             }
     }
@@ -105,6 +106,7 @@ class AnasayfaController : UICollectionViewController {
         
         let hucre = collectionView.dequeueReusableCell(withReuseIdentifier: hucreID, for: indexPath) as! AnaPaylasimCell
         hucre.paylasim = paylasimlar[indexPath.row]
+        hucre.delegate = self
         return hucre
     }
     var gecerliKullanici : Kullanici?
@@ -136,5 +138,14 @@ extension AnasayfaController : UICollectionViewDelegateFlowLayout {
         yukseklik += 50
         yukseklik += 70
         return CGSize(width: view.frame.width, height: yukseklik)
+    }
+}
+
+extension AnasayfaController : AnaPaylasimCellDelegate {
+    
+    func CommentPressed(paylasim : Paylasim) {
+        let commentsController = YorumlarController(collectionViewLayout: UICollectionViewFlowLayout())
+        commentsController.secilenPaylasim = paylasim
+        navigationController?.pushViewController(commentsController, animated: true)
     }
 }

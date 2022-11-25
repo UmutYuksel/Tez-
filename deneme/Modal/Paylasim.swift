@@ -9,13 +9,14 @@ import Firebase
 
 struct Paylasim {
     
+    var id : String?
+    let kullanici : Kullanici
     let paylasimGoruntuURL : String?
     let goruntuGenislik : Double?
     let goruntuYukseklik : Double?
     let kullaniciID : String?
     let mesaj : String?
     let paylasimTarihi : Timestamp
-    let kullanici : Kullanici
     
     
     init(kullanici : Kullanici, sozlukVerisi : [String : Any]) {

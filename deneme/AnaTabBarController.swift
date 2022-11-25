@@ -48,7 +48,7 @@ class AnaTabBarController : UITabBarController {
         let kullaniciProfilNavController = UINavigationController(rootViewController: kullaniciProfilController)
         kullaniciProfilNavController.tabBarItem.image = UIImage(named: "user.png")
         kullaniciProfilNavController.tabBarItem.selectedImage = UIImage(named: "user-selected.png")
-        tabBar.tintColor = .red
+        tabBar.tintColor = .black
         viewControllers = [anaNavController,araNavController,ekleNavController,likeNavController,kullaniciProfilNavController]
         
         guard let items = tabBar.items else { return }
