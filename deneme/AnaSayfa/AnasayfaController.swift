@@ -38,7 +38,7 @@ class AnasayfaController : UICollectionViewController {
     fileprivate func takipEdilenKIDDegerleriGetir() {
         guard let kID = Auth.auth().currentUser?.uid else { return }
         
-        Firestore.firestore().collection("TakipEdiyor").document(kID).addSnapshotListener { (documentsnapshot, hata)  in
+        Firestore.firestore().collection("TakipEdiyor").document(kID).addSnapshotListener { (documentsnapshot, hata) in
             if let hata = hata {
                 print("Paylaşımlar Getirilirken Hata Meydana Geldi : ",hata.localizedDescription)
                 return
@@ -73,14 +73,32 @@ class AnasayfaController : UICollectionViewController {
                         let paylasimVerisi = degisiklik.document.data()
                         var paylasim = Paylasim(kullanici : kullanici ,sozlukVerisi: paylasimVerisi)
                         paylasim.id = degisiklik.document.documentID
-                        self.paylasimlar.append(paylasim)
+                        
+                        guard let gecerliKullaniciID = Auth.auth().currentUser?.uid else { return }
+                        
+                        guard let paylasimID = paylasim.id else { return}
+                        
+                        Firestore.firestore().collection("Begeniler").document(paylasimID).getDocument { (snapshot, hata) in
+                            if let hata = hata {
+                                print("Beğeni Verileri Alınırken Hata Meydana Geldi",hata.localizedDescription)
+                                return
+                            }
+                            let begeniVerisi = snapshot?.data()
+                            
+                            if let begeniDegeri = begeniVerisi?[gecerliKullaniciID] as? Int, begeniDegeri == 1 {
+                                paylasim.begenildi = true
+                            } else {
+                                paylasim.begenildi = false
+                            }
+                            self.paylasimlar.append(paylasim)
+                            self.paylasimlar.reverse()
+                            self.paylasimlar.sort { (p1 , p2) -> Bool in
+                                return p1.paylasimTarihi.dateValue().compare(p2.paylasimTarihi.dateValue()) == .orderedDescending
+                            }
+                            self.collectionView.reloadData()
                         }
+                    }
                 })
-                self.paylasimlar.reverse()
-                self.paylasimlar.sort { (p1 , p2) -> Bool in
-                    return p1.paylasimTarihi.dateValue().compare(p2.paylasimTarihi.dateValue()) == .orderedDescending
-                }
-                self.collectionView.reloadData()
             }
     }
     
@@ -88,6 +106,14 @@ class AnasayfaController : UICollectionViewController {
         navigationItem.titleView = UIImageView(image: UIImage(named: "food-c.png"))
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "camera.png")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(kameraYonet))
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "messages.png")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(messageController))
+    }
+    
+    @objc fileprivate func messageController() {
+        let messageController = LastMessagesController()
+        view.backgroundColor = .blue
+        navigationController?.pushViewController(messageController, animated: true)
     }
     
     @objc fileprivate func kameraYonet() {
@@ -142,6 +168,48 @@ extension AnasayfaController : UICollectionViewDelegateFlowLayout {
 }
 
 extension AnasayfaController : AnaPaylasimCellDelegate {
+    
+    func LikePressed(cell: AnaPaylasimCell) {
+        guard let indexPath = collectionView.indexPath(for: cell) else { return }
+        var paylasim = self.paylasimlar[indexPath.row]
+        
+        guard let paylasimID = paylasim.id else { return }
+        guard let gecerliKullaniciID = Auth.auth().currentUser?.uid else { return }
+        
+        let eklenecekDeger = [gecerliKullaniciID : paylasim.begenildi == true ? 0 : 1]
+        
+        Firestore.firestore().collection("Begeniler").document(paylasimID).getDocument { (snapshot, hata) in
+            
+            if let hata = hata {
+                print("Beğeni Verisi Alınamadı",hata.localizedDescription)
+                return
+            }
+            
+            if snapshot?.exists == true {
+                Firestore.firestore().collection("Begeniler").document(paylasimID).updateData(eklenecekDeger) { (hata) in
+                    if let hata = hata {
+                        print("Beğeni Güncellemesi Başarısız",hata.localizedDescription)
+                        return
+                    }
+                    print("Paylaşım Beğenildi")
+                    paylasim.begenildi = !paylasim.begenildi
+                    self.paylasimlar[indexPath.row] = paylasim
+                    self.collectionView.reloadItems(at: [indexPath])
+                }
+            } else {
+                Firestore.firestore().collection("Begeniler").document(paylasimID).setData(eklenecekDeger) { (hata) in
+                    if let hata = hata {
+                        print("Beğeni Verisi Kaydı Başarısız",hata.localizedDescription)
+                        return
+                    }
+                    print("Beğeni Verisi Başarılı")
+                    paylasim.begenildi = !paylasim.begenildi
+                    self.paylasimlar[indexPath.row] = paylasim
+                    self.collectionView.reloadItems(at: [indexPath])
+                }
+            }
+        }
+    }
     
     func CommentPressed(paylasim : Paylasim) {
         let commentsController = YorumlarController(collectionViewLayout: UICollectionViewFlowLayout())

@@ -11,26 +11,43 @@ class YorumCell : UICollectionViewCell {
     
     var yorum : Yorum? {
         didSet{
-            lblComment.text = yorum?.yorumMesaji ?? "Veri Yok"
+            guard let yorum = yorum else { return }
+            imgKullaniciProfil.sd_setImage(with: URL(string: yorum.kullanici.profilGoruntuURL), completed: nil)
+            
+            let attrText = NSMutableAttributedString(string: yorum.kullanici.kullaniciAdi, attributes: [.font : UIFont.boldSystemFont(ofSize: 15)])
+            
+            attrText.append(NSAttributedString(string: " " + (yorum.yorumMesaji), attributes: [.font : UIFont.systemFont(ofSize: 15)]))
+            
+            lblComment.attributedText = attrText
         }
     }
     
-    let lblComment : UILabel = {
-        let lbl = UILabel()
+    let lblComment : UITextView = {
+        let lbl = UITextView()
+        lbl.isEditable = false
+        lbl.isScrollEnabled = false
         lbl.font = UIFont.boldSystemFont(ofSize: 16)
-        lbl.numberOfLines = 0
-        lbl.backgroundColor = .lightGray
         return lbl
     }()
     
+    let imgKullaniciProfil : UIImageView = {
+        let img = UIImageView()
+        img.clipsToBounds = true
+        img.contentMode = .scaleAspectFill
+        img.layer.cornerRadius = 50 / 2
+        return img
+    }()
     
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        
+        addSubview(imgKullaniciProfil)
+        imgKullaniciProfil.anchor(top: topAnchor, bottom: nil, leading: leadingAnchor, trailing: nil, paddingTop: 5, paddingBottom: 0, paddingLeft: 10, paddingRight: 5, width: 50, height: 50)
+        
         addSubview(lblComment)
         
-        lblComment.anchor(top: topAnchor, bottom: bottomAnchor, leading: leadingAnchor, trailing: trailingAnchor, paddingTop: 5, paddingBottom: -5, paddingLeft: 5, paddingRight: -5, width: 0, height: 0)
+        lblComment.anchor(top: topAnchor, bottom: bottomAnchor, leading: imgKullaniciProfil.trailingAnchor, trailing: trailingAnchor, paddingTop: 5, paddingBottom: -5, paddingLeft: 10, paddingRight: -5, width: 0, height: 0)
     }
     
     required init?(coder: NSCoder) {

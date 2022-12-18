@@ -11,7 +11,13 @@ import Firebase
 import SDWebImage
 import FirebaseFirestore
 
+protocol KullanıcıProfilHeaderDelegate {
+    func gridGorunumuneGec()
+    func listeGorunumuneGec()
+}
+
 class KullanıcıProfilHeader : UICollectionViewCell {
+    var delegate : KullanıcıProfilHeaderDelegate?
     var gecerliKullanici : Kullanici? {
         didSet{
             takipButonuAyarla()
@@ -51,6 +57,7 @@ class KullanıcıProfilHeader : UICollectionViewCell {
             }
         } else {
             self.btnProfilDuzenle.setTitle("Profili Düzenle", for: .normal)
+            btnProfilDuzenle.isEnabled = false
         }
     }
         lazy var btnProfilDuzenle : UIButton = {
@@ -115,20 +122,11 @@ class KullanıcıProfilHeader : UICollectionViewCell {
                 }
             }
         }
-        
-        
-        
-        
-        
-        
-    
-        
-        
     }
     
         let lblPaylasim : UILabel = {
             let lbl = UILabel()
-            let attrText = NSMutableAttributedString(string: "10\n",attributes: [.font : UIFont.boldSystemFont(ofSize: 16)])
+            let attrText = NSMutableAttributedString(string: "1\n",attributes: [.font : UIFont.boldSystemFont(ofSize: 16)])
             attrText.append(NSAttributedString(string: "Paylaşım",attributes: [.foregroundColor : UIColor.darkGray, .font : UIFont.systemFont(ofSize: 14)]))
             lbl.attributedText = attrText
             lbl.textAlignment = .center
@@ -137,7 +135,7 @@ class KullanıcıProfilHeader : UICollectionViewCell {
         }()
         let lblTakipci : UILabel = {
             let lbl = UILabel()
-                let attrText = NSMutableAttributedString(string: "2.5M\n",attributes: [.font : UIFont.boldSystemFont(ofSize: 16)])
+                let attrText = NSMutableAttributedString(string: "593MN\n",attributes: [.font : UIFont.boldSystemFont(ofSize: 16)])
             attrText.append(NSAttributedString(string: "Takipçi",attributes: [.foregroundColor : UIColor.darkGray, .font : UIFont.systemFont(ofSize: 14)]))
             lbl.attributedText = attrText
             lbl.textAlignment = .center
@@ -146,7 +144,7 @@ class KullanıcıProfilHeader : UICollectionViewCell {
         }()
         let lblTakipEdiyor : UILabel = {
             let lbl = UILabel()
-            let attrText = NSMutableAttributedString(string: "10\n",attributes: [.font : UIFont.boldSystemFont(ofSize: 16)])
+            let attrText = NSMutableAttributedString(string: "0\n",attributes: [.font : UIFont.boldSystemFont(ofSize: 16)])
             attrText.append(NSAttributedString(string: "Takip Ediyor",attributes: [.foregroundColor :   UIColor.darkGray, .font : UIFont.systemFont(ofSize: 14)]))
             lbl.attributedText = attrText
             lbl.textAlignment = .center
@@ -161,18 +159,32 @@ class KullanıcıProfilHeader : UICollectionViewCell {
             return lbl
         }()
     
-        let btnGrid : UIButton = {
+        lazy var btnGrid : UIButton = {
             let btn = UIButton(type: .system)
             btn.setImage(UIImage(named: "mesh.png"), for: .normal)
+            btn.addTarget(self, action: #selector(btnGridPressed), for: .touchUpInside)
             return btn
         }()
+    
+    @objc fileprivate func btnGridPressed() {
+        btnGrid.tintColor = .anaMavi()
+        btnListe.tintColor = UIColor(white: 0, alpha: 0.2)
+        delegate?.gridGorunumuneGec()
+    }
         
-        let btnListe : UIButton = {
+        lazy var btnListe : UIButton = {
             let btn = UIButton(type: .system)
             btn.setImage(UIImage(named: "list.png"), for: .normal)
             btn.tintColor = UIColor(white: 0, alpha: 0.2)
+            btn.addTarget(self, action: #selector(btnListePressed), for: .touchUpInside)
             return btn
         }()
+    
+    @objc fileprivate func btnListePressed() {
+        btnListe.tintColor = .anaMavi()
+        btnGrid.tintColor = UIColor(white: 0, alpha: 0.2)
+        delegate?.listeGorunumuneGec()
+    }
         
         let btnYerIsareti : UIButton = {
             let btn = UIButton(type: .system)

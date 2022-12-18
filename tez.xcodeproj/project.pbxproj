@@ -16,11 +16,30 @@
 		924F7CE828FD6823003E043E /* KullanıcıProfilController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924F7CE728FD6823003E043E /* KullanıcıProfilController.swift */; };
 		924F7CEB28FD7A94003E043E /* KullanıcıProfilHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924F7CEA28FD7A94003E043E /* KullanıcıProfilHeader.swift */; };
 		924F7CEE28FD818F003E043E /* Kullanıcı.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924F7CED28FD818F003E043E /* Kullanıcı.swift */; };
+		924FCECF294F6F5100108BE0 /* MessageNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924FCECE294F6F5000108BE0 /* MessageNavBar.swift */; };
+		92537982294F39AB005C4C92 /* Uzantı+UiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92537981294F39AB005C4C92 /* Uzantı+UiView.swift */; };
+		92537984294F3A8D005C4C92 /* Uzantı+UiView+StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92537983294F3A8D005C4C92 /* Uzantı+UiView+StackView.swift */; };
+		92537986294F3E75005C4C92 /* NewMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92537985294F3E75005C4C92 /* NewMessage.swift */; };
+		92537988294F606F005C4C92 /* LastMessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92537987294F606F005C4C92 /* LastMessagesController.swift */; };
 		92626D36290994CF00C19682 /* FotografSeciciHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92626D35290994CF00C19682 /* FotografSeciciHeader.swift */; };
 		92626D3829099CFE00C19682 /* FotografPaylasController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92626D3729099CFE00C19682 /* FotografPaylasController.swift */; };
+		926B0183294A05090029C237 /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B0182294A05090029C237 /* MessagesController.swift */; };
+		926B018D294A2F270029C237 /* ListeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B018C294A2F270029C237 /* ListeCell.swift */; };
+		926B018F294A31530029C237 /* ListeHeaderFooterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B018E294A31530029C237 /* ListeHeaderFooterController.swift */; };
+		926B0192294A372E0029C237 /* ImageViewAspectFit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B0191294A372E0029C237 /* ImageViewAspectFit.swift */; };
+		926B0196294A381F0029C237 /* ImageViewAspectFill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B0195294A381F0029C237 /* ImageViewAspectFill.swift */; };
+		926B0198294A386E0029C237 /* TextFieldIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B0197294A386E0029C237 /* TextFieldIntent.swift */; };
 		927F63172930DD200069BC95 /* YorumlarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927F63162930DD200069BC95 /* YorumlarController.swift */; };
 		927F63192930ECFA0069BC95 /* YorumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927F63182930ECFA0069BC95 /* YorumCell.swift */; };
 		927F631B293101AD0069BC95 /* Yorum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927F631A293101AD0069BC95 /* Yorum.swift */; };
+		92957520294E17E800A1D479 /* UiButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9295751F294E17E800A1D479 /* UiButton.swift */; };
+		92957522294E217500A1D479 /* UiLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92957521294E217500A1D479 /* UiLabel.swift */; };
+		92957524294E222500A1D479 /* UiStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92957523294E222500A1D479 /* UiStackView.swift */; };
+		92957526294E252D00A1D479 /* UiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92957525294E252D00A1D479 /* UiTextField.swift */; };
+		92957528294E256500A1D479 /* UiTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92957527294E256500A1D479 /* UiTextView.swift */; };
+		9295752C294E33ED00A1D479 /* DaireselImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9295752B294E33ED00A1D479 /* DaireselImageView.swift */; };
+		9295752E294E36F600A1D479 /* ListeHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9295752D294E36F600A1D479 /* ListeHeaderController.swift */; };
+		92957530294E378500A1D479 /* ListeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9295752F294E378500A1D479 /* ListeController.swift */; };
 		929721E0292B921400AEC99A /* KullanıcıAramaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929721DF292B921400AEC99A /* KullanıcıAramaController.swift */; };
 		929721E2292B9A0000AEC99A /* KullanıcıAramaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929721E1292B9A0000AEC99A /* KullanıcıAramaCell.swift */; };
 		929721E4292BB92700AEC99A /* UzantiFirestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929721E3292BB92700AEC99A /* UzantiFirestore.swift */; };
@@ -39,6 +58,7 @@
 		92C42BF0290C038D008F22E8 /* KullaniciPaylasimFotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C42BEF290C038D008F22E8 /* KullaniciPaylasimFotoCell.swift */; };
 		92C42BF4290C192A008F22E8 /* AnasayfaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C42BF3290C192A008F22E8 /* AnasayfaController.swift */; };
 		92C42BF6290C1A52008F22E8 /* AnaPaylasimCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C42BF5290C1A52008F22E8 /* AnaPaylasimCell.swift */; };
+		92C7A219294F9B0700B75ED5 /* NewMessageNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C7A218294F9B0600B75ED5 /* NewMessageNavBar.swift */; };
 		92E14C6B28F97E280072069F /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E14C6A28F97E280072069F /* UIColor.swift */; };
 		92E14C6D28F98E9E0072069F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92E14C6C28F98E9D0072069F /* GoogleService-Info.plist */; };
 		92E14C7C28F9AB9D0072069F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 92E14C7B28F9AB9D0072069F /* FirebaseAnalytics */; };
@@ -79,11 +99,30 @@
 		924F7CE728FD6823003E043E /* KullanıcıProfilController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KullanıcıProfilController.swift"; sourceTree = "<group>"; };
 		924F7CEA28FD7A94003E043E /* KullanıcıProfilHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KullanıcıProfilHeader.swift"; sourceTree = "<group>"; };
 		924F7CED28FD818F003E043E /* Kullanıcı.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kullanıcı.swift"; sourceTree = "<group>"; };
+		924FCECE294F6F5000108BE0 /* MessageNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageNavBar.swift; sourceTree = "<group>"; };
+		92537981294F39AB005C4C92 /* Uzantı+UiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Uzantı+UiView.swift"; sourceTree = "<group>"; };
+		92537983294F3A8D005C4C92 /* Uzantı+UiView+StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Uzantı+UiView+StackView.swift"; sourceTree = "<group>"; };
+		92537985294F3E75005C4C92 /* NewMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessage.swift; sourceTree = "<group>"; };
+		92537987294F606F005C4C92 /* LastMessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastMessagesController.swift; sourceTree = "<group>"; };
 		92626D35290994CF00C19682 /* FotografSeciciHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FotografSeciciHeader.swift; sourceTree = "<group>"; };
 		92626D3729099CFE00C19682 /* FotografPaylasController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FotografPaylasController.swift; sourceTree = "<group>"; };
+		926B0182294A05090029C237 /* MessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesController.swift; sourceTree = "<group>"; };
+		926B018C294A2F270029C237 /* ListeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeCell.swift; sourceTree = "<group>"; };
+		926B018E294A31530029C237 /* ListeHeaderFooterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeHeaderFooterController.swift; sourceTree = "<group>"; };
+		926B0191294A372E0029C237 /* ImageViewAspectFit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewAspectFit.swift; sourceTree = "<group>"; };
+		926B0195294A381F0029C237 /* ImageViewAspectFill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewAspectFill.swift; sourceTree = "<group>"; };
+		926B0197294A386E0029C237 /* TextFieldIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldIntent.swift; sourceTree = "<group>"; };
 		927F63162930DD200069BC95 /* YorumlarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YorumlarController.swift; sourceTree = "<group>"; };
 		927F63182930ECFA0069BC95 /* YorumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YorumCell.swift; sourceTree = "<group>"; };
 		927F631A293101AD0069BC95 /* Yorum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Yorum.swift; sourceTree = "<group>"; };
+		9295751F294E17E800A1D479 /* UiButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiButton.swift; sourceTree = "<group>"; };
+		92957521294E217500A1D479 /* UiLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiLabel.swift; sourceTree = "<group>"; };
+		92957523294E222500A1D479 /* UiStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiStackView.swift; sourceTree = "<group>"; };
+		92957525294E252D00A1D479 /* UiTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiTextField.swift; sourceTree = "<group>"; };
+		92957527294E256500A1D479 /* UiTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiTextView.swift; sourceTree = "<group>"; };
+		9295752B294E33ED00A1D479 /* DaireselImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaireselImageView.swift; sourceTree = "<group>"; };
+		9295752D294E36F600A1D479 /* ListeHeaderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeHeaderController.swift; sourceTree = "<group>"; };
+		9295752F294E378500A1D479 /* ListeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeController.swift; sourceTree = "<group>"; };
 		929721DF292B921400AEC99A /* KullanıcıAramaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KullanıcıAramaController.swift"; sourceTree = "<group>"; };
 		929721E1292B9A0000AEC99A /* KullanıcıAramaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KullanıcıAramaCell.swift"; sourceTree = "<group>"; };
 		929721E3292BB92700AEC99A /* UzantiFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UzantiFirestore.swift; sourceTree = "<group>"; };
@@ -106,6 +145,7 @@
 		92C42BEF290C038D008F22E8 /* KullaniciPaylasimFotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KullaniciPaylasimFotoCell.swift; sourceTree = "<group>"; };
 		92C42BF3290C192A008F22E8 /* AnasayfaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnasayfaController.swift; sourceTree = "<group>"; };
 		92C42BF5290C1A52008F22E8 /* AnaPaylasimCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnaPaylasimCell.swift; sourceTree = "<group>"; };
+		92C7A218294F9B0600B75ED5 /* NewMessageNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageNavBar.swift; sourceTree = "<group>"; };
 		92E14C6A28F97E280072069F /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		92E14C6C28F98E9D0072069F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -188,11 +228,45 @@
 			children = (
 				924F7CED28FD818F003E043E /* Kullanıcı.swift */,
 				92C42BED290C0198008F22E8 /* Paylasim.swift */,
-				929721E3292BB92700AEC99A /* UzantiFirestore.swift */,
-				929721E5292BBE1600AEC99A /* Uzantı+Date.swift */,
 				927F631A293101AD0069BC95 /* Yorum.swift */,
 			);
 			path = Modal;
+			sourceTree = "<group>";
+		};
+		926B0181294A04F60029C237 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				926B0182294A05090029C237 /* MessagesController.swift */,
+				92537985294F3E75005C4C92 /* NewMessage.swift */,
+				92537987294F606F005C4C92 /* LastMessagesController.swift */,
+				924FCECE294F6F5000108BE0 /* MessageNavBar.swift */,
+				92C7A218294F9B0600B75ED5 /* NewMessageNavBar.swift */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
+		926B0190294A37050029C237 /* Uzantılar */ = {
+			isa = PBXGroup;
+			children = (
+				929721E5292BBE1600AEC99A /* Uzantı+Date.swift */,
+				929721E3292BB92700AEC99A /* UzantiFirestore.swift */,
+				926B018C294A2F270029C237 /* ListeCell.swift */,
+				926B018E294A31530029C237 /* ListeHeaderFooterController.swift */,
+				926B0191294A372E0029C237 /* ImageViewAspectFit.swift */,
+				926B0195294A381F0029C237 /* ImageViewAspectFill.swift */,
+				926B0197294A386E0029C237 /* TextFieldIntent.swift */,
+				9295751F294E17E800A1D479 /* UiButton.swift */,
+				92957521294E217500A1D479 /* UiLabel.swift */,
+				92957523294E222500A1D479 /* UiStackView.swift */,
+				92957525294E252D00A1D479 /* UiTextField.swift */,
+				92957527294E256500A1D479 /* UiTextView.swift */,
+				9295752B294E33ED00A1D479 /* DaireselImageView.swift */,
+				9295752D294E36F600A1D479 /* ListeHeaderController.swift */,
+				9295752F294E378500A1D479 /* ListeController.swift */,
+				92537981294F39AB005C4C92 /* Uzantı+UiView.swift */,
+				92537983294F3A8D005C4C92 /* Uzantı+UiView+StackView.swift */,
+			);
+			path = "Uzantılar";
 			sourceTree = "<group>";
 		};
 		929721DE292B920200AEC99A /* Arama */ = {
@@ -227,6 +301,8 @@
 		92B6F18E28F874DC00CDAF7A /* deneme */ = {
 			isa = PBXGroup;
 			children = (
+				926B0190294A37050029C237 /* Uzantılar */,
+				926B0181294A04F60029C237 /* Messages */,
 				92430801292FA1EF00C6C23A /* Camera */,
 				929721DE292B920200AEC99A /* Arama */,
 				92C42BF2290C1911008F22E8 /* AnaSayfa */,
@@ -441,26 +517,46 @@
 			buildActionMask = 2147483647;
 			files = (
 				9244A36D2902E2D500E77961 /* OturumAcController.swift in Sources */,
+				926B018D294A2F270029C237 /* ListeCell.swift in Sources */,
+				92957522294E217500A1D479 /* UiLabel.swift in Sources */,
+				92537982294F39AB005C4C92 /* Uzantı+UiView.swift in Sources */,
 				929DCC1B29098F1300AC88FC /* FotografSeciciCell.swift in Sources */,
 				924B0B532906E86100B161BC /* FotografSeciciController.swift in Sources */,
+				92957526294E252D00A1D479 /* UiTextField.swift in Sources */,
+				926B0183294A05090029C237 /* MessagesController.swift in Sources */,
+				92957530294E378500A1D479 /* ListeController.swift in Sources */,
 				924F7CEB28FD7A94003E043E /* KullanıcıProfilHeader.swift in Sources */,
 				92430805292FBA5100C6C23A /* Animation.swift in Sources */,
+				92537984294F3A8D005C4C92 /* Uzantı+UiView+StackView.swift in Sources */,
+				926B018F294A31530029C237 /* ListeHeaderFooterController.swift in Sources */,
+				9295752E294E36F600A1D479 /* ListeHeaderController.swift in Sources */,
+				92537986294F3E75005C4C92 /* NewMessage.swift in Sources */,
 				927F631B293101AD0069BC95 /* Yorum.swift in Sources */,
+				926B0198294A386E0029C237 /* TextFieldIntent.swift in Sources */,
 				924F7CE828FD6823003E043E /* KullanıcıProfilController.swift in Sources */,
 				92B6F19428F874DC00CDAF7A /* KayitOlController.swift in Sources */,
 				92430803292FA20B00C6C23A /* CameraController.swift in Sources */,
+				92957528294E256500A1D479 /* UiTextView.swift in Sources */,
 				924F7CE528FD679F003E043E /* AnaTabBarController.swift in Sources */,
 				92E14C6B28F97E280072069F /* UIColor.swift in Sources */,
+				924FCECF294F6F5100108BE0 /* MessageNavBar.swift in Sources */,
 				929721E2292B9A0000AEC99A /* KullanıcıAramaCell.swift in Sources */,
 				92B6F19028F874DC00CDAF7A /* AppDelegate.swift in Sources */,
+				92537988294F606F005C4C92 /* LastMessagesController.swift in Sources */,
 				929721E4292BB92700AEC99A /* UzantiFirestore.swift in Sources */,
+				92C7A219294F9B0700B75ED5 /* NewMessageNavBar.swift in Sources */,
 				924F7CEE28FD818F003E043E /* Kullanıcı.swift in Sources */,
 				92626D3829099CFE00C19682 /* FotografPaylasController.swift in Sources */,
 				927F63192930ECFA0069BC95 /* YorumCell.swift in Sources */,
+				926B0192294A372E0029C237 /* ImageViewAspectFit.swift in Sources */,
+				92957524294E222500A1D479 /* UiStackView.swift in Sources */,
 				92C42BF4290C192A008F22E8 /* AnasayfaController.swift in Sources */,
 				929721E6292BBE1700AEC99A /* Uzantı+Date.swift in Sources */,
 				92C42BF0290C038D008F22E8 /* KullaniciPaylasimFotoCell.swift in Sources */,
+				92957520294E17E800A1D479 /* UiButton.swift in Sources */,
+				926B0196294A381F0029C237 /* ImageViewAspectFill.swift in Sources */,
 				92C42BEE290C0198008F22E8 /* Paylasim.swift in Sources */,
+				9295752C294E33ED00A1D479 /* DaireselImageView.swift in Sources */,
 				92626D36290994CF00C19682 /* FotografSeciciHeader.swift in Sources */,
 				929721E0292B921400AEC99A /* KullanıcıAramaController.swift in Sources */,
 				92430807292FC9A700C6C23A /* AnimationDismiss.swift in Sources */,
@@ -646,11 +742,14 @@
 				DEVELOPMENT_TEAM = 2C2JQAY773;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = deneme/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Fotoğraf Çekmek İçin Kamera Erişim İzini";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Fotoğraflara Erişmek için";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -674,11 +773,14 @@
 				DEVELOPMENT_TEAM = 2C2JQAY773;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = deneme/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Fotoğraf Çekmek İçin Kamera Erişim İzini";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Fotoğraflara Erişmek için";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

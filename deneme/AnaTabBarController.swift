@@ -34,22 +34,16 @@ class AnaTabBarController : UITabBarController {
     func gorunumuOlustur() {
         
         let anaNavController = navControllerOlustur(rootViewController: AnasayfaController(collectionViewLayout: UICollectionViewFlowLayout()))
-        
         let araNavController = araControllerOlustur(rootViewController: KullanıcıAramaController(collectionViewLayout: UICollectionViewFlowLayout()))
-        
         let ekleNavController = ekleControllerOlustur()
-        
-        let likeNavController = likeControllerOlustur()
-        
-        
-        
         let layout = UICollectionViewFlowLayout()
         let kullaniciProfilController = KullanıcıProfilController(collectionViewLayout: layout)
+        
         let kullaniciProfilNavController = UINavigationController(rootViewController: kullaniciProfilController)
         kullaniciProfilNavController.tabBarItem.image = UIImage(named: "user.png")
         kullaniciProfilNavController.tabBarItem.selectedImage = UIImage(named: "user-selected.png")
         tabBar.tintColor = .black
-        viewControllers = [anaNavController,araNavController,ekleNavController,likeNavController,kullaniciProfilNavController]
+        viewControllers = [anaNavController,araNavController,ekleNavController,kullaniciProfilNavController]
         
         guard let items = tabBar.items else { return }
         
@@ -76,13 +70,6 @@ class AnaTabBarController : UITabBarController {
         let rootController = UIViewController()
         let navController = UINavigationController(rootViewController: rootController)
         navController.tabBarItem.image = UIImage(named: "add.png")
-        return navController
-    }
-    fileprivate func likeControllerOlustur()-> UINavigationController {
-        let rootController = UIViewController()
-        let navController = UINavigationController(rootViewController: rootController)
-        navController.tabBarItem.image = UIImage(named: "heart.png")
-        navController.tabBarItem.selectedImage = UIImage(named: "heart-selected.png")
         return navController
     }
 }

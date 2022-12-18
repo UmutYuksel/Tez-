@@ -11,6 +11,7 @@ import Firebase
 protocol AnaPaylasimCellDelegate {
     
     func CommentPressed(paylasim : Paylasim)
+    func LikePressed(cell : AnaPaylasimCell)
     
 }
 
@@ -29,6 +30,12 @@ class AnaPaylasimCell : UICollectionViewCell {
             imgKullaniciProfilFoto.sd_setImage(with: profilGoruntuURL, completed: nil)
             
             attrPaylasimMesajıOlustur()
+            
+            if paylasim?.begenildi == true {
+                btnLike.setImage(UIImage(named: "heart-selected24.png")?.withRenderingMode(.alwaysOriginal), for: .normal)
+            } else {
+                btnLike.setImage(UIImage(named: "heart24.png")?.withRenderingMode(.alwaysOriginal), for: .normal)
+            }
             
         }
     }
@@ -53,11 +60,17 @@ class AnaPaylasimCell : UICollectionViewCell {
         btn.setImage(UIImage(named: "bookmark.png")?.withRenderingMode(.alwaysOriginal), for: .normal)
         return btn
     }()
-    let btnLike : UIButton = {
+    lazy var btnLike : UIButton = {
         let btn = UIButton(type: .system)
         btn.setImage(UIImage(named: "heart24.png")?.withRenderingMode(.alwaysOriginal),for: .normal)
+        btn.addTarget(self, action: #selector(btnLikePressed), for: .touchUpInside)
         return btn
     }()
+    
+    @objc fileprivate func btnLikePressed() {
+        print("Paylaşım beğendi")
+        delegate?.LikePressed(cell: self)
+    }
     
     let BtnSentMessage :  UIButton = {
         let btn = UIButton(type: .system)
@@ -72,8 +85,6 @@ class AnaPaylasimCell : UICollectionViewCell {
     }()
     
     @objc fileprivate func btnCommentPressed() {
-        print("Yorumlar Listeleniyor")
-        
         guard let paylasim = self.paylasim else { return }
         delegate?.CommentPressed(paylasim: paylasim)
     }

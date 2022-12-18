@@ -9,10 +9,14 @@ import Foundation
 
 struct Yorum {
     
+    let kullanici : Kullanici
     let yorumMesaji : String
     let kullaniciID : String
     
-    init(sozlukVerisi: [String : Any]) {
+    
+    init(kullanici : Kullanici, sozlukVerisi: [String : Any]) {
+        
+        self.kullanici = kullanici
         self.yorumMesaji = sozlukVerisi["yorumMesajı"] as? String ?? ""
         self.kullaniciID = sozlukVerisi["kullaniciID"] as? String ?? ""
     }

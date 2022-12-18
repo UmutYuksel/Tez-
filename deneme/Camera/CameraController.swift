@@ -92,6 +92,16 @@ class CameraController : UIViewController , UIViewControllerTransitioningDelegat
         return animationDismiss
     }
     
+    @objc fileprivate func btnIptalPressed() {
+        
+    }
+    
+    @objc fileprivate func btnSonrakiPressed() {
+        
+        let fotoPaylasController = FotografPaylasController()
+        navigationController?.pushViewController(fotoPaylasController, animated: true)
+    }
+    
 }
 
 extension CameraController :AVCapturePhotoCaptureDelegate {
@@ -112,5 +122,7 @@ extension CameraController :AVCapturePhotoCaptureDelegate {
         hud.textLabel.text = "Fotoğraf Çekiliyor"
         hud.show(in: self.view)
         hud.dismiss(afterDelay: 1)
+        
+        
     }
 }

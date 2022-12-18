@@ -47,10 +47,12 @@ class KayitOlController: UIViewController {
         (txtParola.text?.count ?? 0) > 0
  
         if formGecerlimi {
-            btnKayitOl.backgroundColor = UIColor.rgbDonustur(red: 150, green: 205, blue: 245)
+            btnKayitOl.isEnabled = true
+            btnKayitOl.backgroundColor = UIColor.anaMavi()
         }
         else {
-            btnKayitOl.backgroundColor = .lightGray
+            btnKayitOl.isEnabled = false
+            btnKayitOl.backgroundColor = UIColor.rgbDonustur(red: 150, green: 205, blue: 245)
         }
     }
     

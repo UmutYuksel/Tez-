@@ -18,8 +18,9 @@ class YorumlarController : UICollectionViewController {
         super.viewDidLoad()
         
         navigationItem.title = "Yorumlar"
-        
-        collectionView.backgroundColor = .yellow
+        collectionView.backgroundColor = .white
+        collectionView.alwaysBounceVertical = true
+        collectionView.keyboardDismissMode = .interactive
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: -80, right: 0)
         collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: -80, right: 0)
         collectionView.register(YorumCell.self, forCellWithReuseIdentifier: yorumcellID)
@@ -38,10 +39,14 @@ class YorumlarController : UICollectionViewController {
             }
             snapshot?.documentChanges.forEach({ (documentChange) in
                 let sozlukVerisi = documentChange.document.data()
-                let yorum = Yorum(sozlukVerisi: sozlukVerisi)
-                self.yorumlar.append(yorum)
-                self.collectionView.reloadData()
-                print(yorum.yorumMesaji, " - ", yorum.kullaniciID)
+                
+                guard let kullaniciID = sozlukVerisi["kullaniciID"] as? String else { return }
+                Firestore.kullaniciyiOlustur(kullaniciID: kullaniciID) { (kullanici) in
+                    
+                    let yorum = Yorum(kullanici: kullanici,sozlukVerisi: sozlukVerisi)
+                    self.yorumlar.append(yorum)
+                    self.collectionView.reloadData()
+                }
             })
         }
     }
@@ -83,6 +88,13 @@ class YorumlarController : UICollectionViewController {
         containerView.addSubview(txtComment)
         
         txtComment.anchor(top: containerView.safeAreaLayoutGuide.topAnchor, bottom: containerView.safeAreaLayoutGuide.bottomAnchor, leading: containerView.safeAreaLayoutGuide.leadingAnchor, trailing: btnCommentSend.leadingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 0, height: 0)
+        
+        let ayracView = UIView()
+        ayracView.backgroundColor = UIColor.rgbDonustur(red: 230, green: 230, blue: 230)
+        containerView.addSubview(ayracView)
+        
+        ayracView.anchor(top: containerView.topAnchor, bottom: nil, leading: containerView.leadingAnchor, trailing: containerView.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 0, height: 0.7)
+        
         
         return containerView
     }()
@@ -131,8 +143,23 @@ class YorumlarController : UICollectionViewController {
 
 extension YorumlarController : UICollectionViewDelegateFlowLayout {
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 65)
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 60)
+        let geciciCell = YorumCell(frame: frame)
+        geciciCell.yorum = yorumlar[indexPath.row]
+        geciciCell.layoutIfNeeded()
+        
+        let hedefBoyut = CGSize(width: view.frame.width, height: 9999)
+        
+        let tahminiBoyut = geciciCell.systemLayoutSizeFitting(hedefBoyut)
+        
+        let minYukseklik = max(60, tahminiBoyut.height)
+        
+        return CGSize(width: view.frame.width, height: minYukseklik)
     }
 }
 

@@ -12,6 +12,10 @@ import FirebaseFirestore
 
 class KullanıcıProfilController : UICollectionViewController {
     
+    let listePaylasimHucreID = "listePaylasimHucreID"
+    
+    var gridGorunum = true
+    
     var kullaniciID : String?
     
     let paylasimHucreID = "paylaşımHücreID"
@@ -23,6 +27,7 @@ class KullanıcıProfilController : UICollectionViewController {
         kullaniciyiGetir()
         collectionView.register(KullanıcıProfilHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerID")
         collectionView.register(KullaniciPaylasimFotoCell.self, forCellWithReuseIdentifier: paylasimHucreID)
+        collectionView.register(AnaPaylasimCell.self, forCellWithReuseIdentifier: listePaylasimHucreID)
         btnOturumKapatOlustur()
     }
     
@@ -35,7 +40,7 @@ class KullanıcıProfilController : UICollectionViewController {
         guard let gecerliKullaniciID = self.gecerliKullanici?.kullaniciID else { return }
         
         Firestore.firestore().collection("Paylasimlar").document(gecerliKullaniciID)
-            .collection("Fotograf_Paylasimlari").order(by: "PaylasimTarihi",descending: false)
+            .collection("Fotograf_Paylasimlari").order(by: "PaylasimTarihi", descending: false)
         .addSnapshotListener{ (QuerySnapshot, hata) in
             
             if let hata = hata {
@@ -43,6 +48,7 @@ class KullanıcıProfilController : UICollectionViewController {
                 return
             }
             QuerySnapshot?.documentChanges.forEach({ (degisiklik) in
+                
                 if degisiklik.type == .added {
                     let paylasimVerisi = degisiklik.document.data() // Döküman Verisine Ulaşmayı Sağlar
                     let paylasim = Paylasim(kullanici: self.gecerliKullanici!, sozlukVerisi: paylasimVerisi)
@@ -93,8 +99,13 @@ class KullanıcıProfilController : UICollectionViewController {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let genislik = (view.frame.width - 5) / 3
-        return CGSize(width: genislik, height: genislik)
+        if gridGorunum{
+            let genislik = (view.frame.width - 5) / 3
+            return CGSize(width: genislik, height: genislik)
+        } else {
+            return CGSize(width: view.frame.width, height: view.frame.width+200)
+        }
+    
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -102,10 +113,16 @@ class KullanıcıProfilController : UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if gridGorunum {
+            let paylasimHucre = collectionView.dequeueReusableCell(withReuseIdentifier: paylasimHucreID, for: indexPath) as! KullaniciPaylasimFotoCell
+            paylasimHucre.paylasim = paylasimlar[indexPath.row]
+            return paylasimHucre
+        } else {
+            let hucre = collectionView.dequeueReusableCell(withReuseIdentifier: listePaylasimHucreID, for: indexPath) as! AnaPaylasimCell
+            hucre.paylasim = paylasimlar[indexPath.row]
+            return hucre
+        }
         
-        let paylasimHucre = collectionView.dequeueReusableCell(withReuseIdentifier: paylasimHucreID, for: indexPath) as! KullaniciPaylasimFotoCell
-        paylasimHucre.paylasim = paylasimlar[indexPath.row]
-        return paylasimHucre
     }
     
     
@@ -113,8 +130,7 @@ class KullanıcıProfilController : UICollectionViewController {
         
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerID", for: indexPath) as! KullanıcıProfilHeader
         header.gecerliKullanici = gecerliKullanici
-        
-        
+        header.delegate = self
         return header
     }
     var gecerliKullanici : Kullanici?
@@ -147,4 +163,15 @@ extension KullanıcıProfilController : UICollectionViewDelegateFlowLayout {
         return CGSize(width: view.frame.width, height: 200)
     }
     
+}
+extension KullanıcıProfilController : KullanıcıProfilHeaderDelegate {
+    
+    func gridGorunumuneGec() {
+        gridGorunum = true
+        collectionView.reloadData()
+    }
+    func listeGorunumuneGec() {
+        gridGorunum = false
+        collectionView.reloadData()
+    }
 }
