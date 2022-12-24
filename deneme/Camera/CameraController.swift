@@ -92,22 +92,25 @@ class CameraController : UIViewController , UIViewControllerTransitioningDelegat
         return animationDismiss
     }
     
-    @objc fileprivate func btnIptalPressed() {
-        
+    @objc fileprivate func btnSharePressed() {
+        let newPhotoShareController = FotografPaylasController()
+        navigationController?.pushViewController(newPhotoShareController, animated: true)
     }
     
-    @objc fileprivate func btnSonrakiPressed() {
-        
-        let fotoPaylasController = FotografPaylasController()
-        navigationController?.pushViewController(fotoPaylasController, animated: true)
+    @objc fileprivate func btnBackPress() {
+        dismiss(animated: true)
     }
     
 }
 
 extension CameraController :AVCapturePhotoCaptureDelegate {
     
+    
+    
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         print("Çekilen Fotoğraf hafızayan alındı")
+        
+        let navbar = CameControllerNavBar()
         
         guard let goruntuVerisi = photo.fileDataRepresentation() else { return }
         
@@ -115,8 +118,13 @@ extension CameraController :AVCapturePhotoCaptureDelegate {
         let imgGoruntuOnizleme = UIImageView(image: goruntuOnizleme)
         
         view.addSubview(imgGoruntuOnizleme)
+        view.addSubview(navbar)
         
-        imgGoruntuOnizleme.anchor(top: view.topAnchor, bottom: view.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 0, height: 0)
+        navbar.anchor(top: view.safeAreaLayoutGuide.topAnchor, bottom: nil, leading: view.leadingAnchor, trailing: view.trailingAnchor, boyut: .init(width: 0, height: 100))
+        navbar.btnShare.addTarget(self, action: #selector(btnSharePressed), for: .touchUpInside)
+        navbar.btnBack.addTarget(self, action: #selector(btnBackPress), for: .touchUpInside)
+        imgGoruntuOnizleme.anchor(top: navbar.bottomAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 0, height: 0)
+
         
         let hud = JGProgressHUD(style: .light)
         hud.textLabel.text = "Fotoğraf Çekiliyor"

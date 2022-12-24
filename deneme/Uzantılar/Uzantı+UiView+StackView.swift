@@ -38,7 +38,7 @@ extension UIView {
         return self as! T
     }
     
-    
+    @discardableResult
     func yukseklikAyarla(_ yukseklik : CGFloat) -> UIView {
         translatesAutoresizingMaskIntoConstraints = false
         heightAnchor.constraint(equalToConstant: yukseklik).isActive = true

@@ -50,21 +50,21 @@ open class ListeHeaderFooterController <T : ListeCell<U> , U, H : UICollectionRe
         return cell
     }
     
-    open func headerAyarla() {
+    open func headerAyarla(_ header : H) {
         
     }
     
-    open func footerAyarla() {
+    open func footerAyarla(_ footer : F) {
         
     }
     
     open override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let ekView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ekViewId, for: indexPath)
         
-        if let _ = ekView as? H {
-            headerAyarla()
-        } else if let _ = ekView as? F {
-            footerAyarla()
+        if let header = ekView as? H {
+            headerAyarla(header)
+        } else if let footer = ekView as? F {
+            footerAyarla(footer)
         }
         return ekView
     }

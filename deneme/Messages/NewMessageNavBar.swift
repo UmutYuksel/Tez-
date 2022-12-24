@@ -8,13 +8,14 @@
 import UIKit
 
 class NewMessageNavBar : UIView {
+    
     let btnBack = UIButton(image: UIImage(named: "edge-l.png")!.withRenderingMode(.alwaysOriginal))
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         backgroundColor = .white
         let imgMessage = UIImageView(image: UIImage(named: "messages-cx60.png")?.withRenderingMode(.alwaysOriginal), contentMode: .scaleAspectFit)
-        let lblMessage = UILabel(text: "Mesajlar", font: .boldSystemFont(ofSize: 18), textColor: UIColor.orangeTint(), textAlignment: .center)
+        let lblMessage = UILabel(text: "Yeni Mesaj İçin Alıcı Seçiniz", font: .boldSystemFont(ofSize: 18), textColor: UIColor.orangeTint(), textAlignment: .center)
         
         yatayStackViewOlustur(stackViewOlustur(imgMessage.yukseklikAyarla(45),lblMessage,spacing: 5,alignment: .center),alignment: .center)
         

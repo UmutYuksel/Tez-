@@ -25,6 +25,7 @@ open class ListeCell<T> : UICollectionViewCell {
     func ayracEkle(leadingAnchor : NSLayoutXAxisAnchor) {
         addSubview(ayracView)
         
+        ayracView.backgroundColor = .lightGray
         ayracView.anchor(top: nil, bottom: bottomAnchor, leading: leadingAnchor, trailing: trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 0, height: 0.5)
     }
     

@@ -29,7 +29,9 @@ class KullanıcıProfilController : UICollectionViewController {
         collectionView.register(KullaniciPaylasimFotoCell.self, forCellWithReuseIdentifier: paylasimHucreID)
         collectionView.register(AnaPaylasimCell.self, forCellWithReuseIdentifier: listePaylasimHucreID)
         btnOturumKapatOlustur()
+
     }
+
     
     var paylasimlar = [Paylasim]()
     
@@ -133,6 +135,7 @@ class KullanıcıProfilController : UICollectionViewController {
         header.delegate = self
         return header
     }
+    var kullanicilar = [Kullanici]()
     var gecerliKullanici : Kullanici?
     fileprivate func kullaniciyiGetir() {
         
@@ -173,5 +176,23 @@ extension KullanıcıProfilController : KullanıcıProfilHeaderDelegate {
     func listeGorunumuneGec() {
         gridGorunum = false
         collectionView.reloadData()
+    }
+    
+    
+    func getUserProfileData() {
+        
+        Firestore.firestore().collection("Kullanicilar").addSnapshotListener { (snapshot, err) in
+            if let err = err {
+                print("Kullanıcı Bilgileri Getirilirken Hata Meydana Geldi",err)
+                return
+            }
+            snapshot?.documentChanges.forEach({ (degisiklik) in
+                if degisiklik.type == .added || degisiklik.type == .modified {
+                    let kullanici = Kullanici(kullaniciVerisi: degisiklik.document.data())
+                    self.kullanicilar.append(kullanici)
+                }
+            })
+            self.collectionView.reloadData()
+        }
     }
 }

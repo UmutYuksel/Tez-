@@ -14,6 +14,7 @@ import FirebaseFirestore
 protocol KullanıcıProfilHeaderDelegate {
     func gridGorunumuneGec()
     func listeGorunumuneGec()
+    func getUserProfileData()
 }
 
 class KullanıcıProfilHeader : UICollectionViewCell {
@@ -24,6 +25,9 @@ class KullanıcıProfilHeader : UICollectionViewCell {
             guard let url = URL(string: gecerliKullanici?.profilGoruntuURL ?? "") else { return }
             imgProfilGoruntu.sd_setImage(with: url, completed: nil)
             lblKullaniciAdi.text = gecerliKullanici?.kullaniciAdi
+            attrTakipEdiyorOlustur()
+            attrTakipciOlustur()
+            
         }
     }
     
@@ -31,6 +35,8 @@ class KullanıcıProfilHeader : UICollectionViewCell {
         
         guard let oturumKID = Auth.auth().currentUser?.uid else { return }
         guard let gecerliKID = gecerliKullanici?.kullaniciID else { return }
+        
+        
         
         if oturumKID != gecerliKID {
             
@@ -70,12 +76,15 @@ class KullanıcıProfilHeader : UICollectionViewCell {
             btn.addTarget(self, action: #selector(btnProfil_Takip_Duzenle), for: .touchUpInside)
             return btn
         }()
-    
+
+ 
     @objc fileprivate func btnProfil_Takip_Duzenle() {
         
         guard let oturumuAcanKID = Auth.auth().currentUser?.uid else { return }
         guard let gecerliKID = gecerliKullanici?.kullaniciID else { return }
+        let db = Firestore.firestore()
         
+        // Takip Ediyor İse Takipten Çıkartır
         if btnProfilDuzenle.titleLabel?.text == "Takipten Çık" {
             Firestore.firestore().collection("TakipEdiyor").document(oturumuAcanKID).updateData([gecerliKID : FieldValue.delete()]) { (hata) in
                 if let hata = hata {
@@ -87,7 +96,16 @@ class KullanıcıProfilHeader : UICollectionViewCell {
                 self.btnProfilDuzenle.layer.borderWidth = 1
                 self.btnProfilDuzenle.setTitle("Takip Et", for: .normal)
             }
+            let takipEdiyorSayisi = db.collection("Kullanicilar").document(oturumuAcanKID)
+            takipEdiyorSayisi.updateData([
+                "TakipEdiyorSayisi" : FieldValue.increment(Int64(-1))
+            ])
+            let takipciSayisi = db.collection("Kullanicilar").document(gecerliKID)
+            takipciSayisi.updateData([
+                "TakipciSayisi" : FieldValue.increment(Int64(-1))
+            ])
             return
+            
         }
         
         let eklenecekDeger = [gecerliKID : 1]
@@ -97,7 +115,7 @@ class KullanıcıProfilHeader : UICollectionViewCell {
                 print("Takip Verisi Alınamadı : \(hata.localizedDescription)")
                 return
             }
-            
+            // Takip Verisini Güncellemek İçin
             if snapshot?.exists == true {
                 Firestore.firestore().collection("TakipEdiyor").document(oturumuAcanKID).updateData(eklenecekDeger) {
                     (hata) in
@@ -113,15 +131,35 @@ class KullanıcıProfilHeader : UICollectionViewCell {
                     self.btnProfilDuzenle.layer.borderWidth = 1
                     self.btnProfilDuzenle.layer.cornerRadius = 5
                 }
-            } else {
+                let takipEdiyorSayisi = db.collection("Kullanicilar").document(oturumuAcanKID)
+                takipEdiyorSayisi.updateData([
+                    "TakipEdiyorSayisi" : FieldValue.increment(Int64(1))
+                ])
+                let takipciSayisi = db.collection("Kullanicilar").document(gecerliKID)
+                takipciSayisi.updateData([
+                    "TakipciSayisi" : FieldValue.increment(Int64(1))
+                ])
+                
+            }
+            // Takip Etmeye Yeni Başladı İse
+            else {
                 Firestore.firestore().collection("TakipEdiyor").document(oturumuAcanKID).setData(eklenecekDeger) { (hata) in
                     if let hata = hata  {
                         print("Takip Verisi Kaydı Başarısız : \(hata.localizedDescription)")
                         return
                     }
                 }
+                let takipEdiyorSayisi = db.collection("Kullanicilar").document(oturumuAcanKID)
+                takipEdiyorSayisi.updateData([
+                    "TakipEdiyorSayisi" : FieldValue.increment(Int64(1))
+                ])
+                let takipciSayisi = db.collection("Kullanicilar").document(gecerliKID)
+                takipciSayisi.updateData([
+                    "TakipciSayisi" : FieldValue.increment(Int64(1))
+                ])
             }
         }
+        
     }
     
         let lblPaylasim : UILabel = {
@@ -133,20 +171,28 @@ class KullanıcıProfilHeader : UICollectionViewCell {
             lbl.numberOfLines = 0
         return lbl
         }()
+    
+        fileprivate func attrTakipciOlustur() {
+            let attrText = NSMutableAttributedString(string: "\(gecerliKullanici?.takipciCount ?? 0)\n",attributes: [.font : UIFont.boldSystemFont(ofSize: 16)])
+            attrText.append(NSAttributedString(string: "Takipçi",attributes: [.foregroundColor : UIColor.darkGray, .font : UIFont.systemFont(ofSize: 14)]))
+            lblTakipci.attributedText = attrText
+        }
+    
         let lblTakipci : UILabel = {
             let lbl = UILabel()
-                let attrText = NSMutableAttributedString(string: "593MN\n",attributes: [.font : UIFont.boldSystemFont(ofSize: 16)])
-            attrText.append(NSAttributedString(string: "Takipçi",attributes: [.foregroundColor : UIColor.darkGray, .font : UIFont.systemFont(ofSize: 14)]))
-            lbl.attributedText = attrText
             lbl.textAlignment = .center
             lbl.numberOfLines = 0
             return lbl
         }()
+        
+        fileprivate func attrTakipEdiyorOlustur() {
+            let attrText = NSMutableAttributedString(string: "\(gecerliKullanici?.takipEdiyorCount ?? 0)\n",attributes: [.font : UIFont.boldSystemFont(ofSize: 16)])
+            attrText.append(NSAttributedString(string: "Takip Ediyor",attributes: [.foregroundColor : UIColor.darkGray, .font : UIFont.systemFont(ofSize: 14)]))
+            lblTakipEdiyor.attributedText = attrText
+        }
+        
         let lblTakipEdiyor : UILabel = {
             let lbl = UILabel()
-            let attrText = NSMutableAttributedString(string: "0\n",attributes: [.font : UIFont.boldSystemFont(ofSize: 16)])
-            attrText.append(NSAttributedString(string: "Takip Ediyor",attributes: [.foregroundColor :   UIColor.darkGray, .font : UIFont.systemFont(ofSize: 14)]))
-            lbl.attributedText = attrText
             lbl.textAlignment = .center
             lbl.numberOfLines = 0
             return lbl
@@ -240,7 +286,8 @@ class KullanıcıProfilHeader : UICollectionViewCell {
         ustAyracView.anchor(top: stackView.topAnchor, bottom: nil, leading: leadingAnchor, trailing: trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 0, height: 0.5)
         altAyracView.anchor(top: stackView.bottomAnchor, bottom: nil, leading: leadingAnchor, trailing: trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 0, height: 0.5)
     }
-        
+    
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
