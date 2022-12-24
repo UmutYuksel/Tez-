@@ -15,19 +15,24 @@ protocol KullanıcıProfilHeaderDelegate {
     func gridGorunumuneGec()
     func listeGorunumuneGec()
     func getUserProfileData()
+
 }
 
 class KullanıcıProfilHeader : UICollectionViewCell {
+    
     var delegate : KullanıcıProfilHeaderDelegate?
+    
     var gecerliKullanici : Kullanici? {
         didSet{
+            
             takipButonuAyarla()
             guard let url = URL(string: gecerliKullanici?.profilGoruntuURL ?? "") else { return }
             imgProfilGoruntu.sd_setImage(with: url, completed: nil)
             lblKullaniciAdi.text = gecerliKullanici?.kullaniciAdi
             attrTakipEdiyorOlustur()
             attrTakipciOlustur()
-            
+            attrPaylasimOlustur()
+
         }
     }
     
@@ -37,10 +42,15 @@ class KullanıcıProfilHeader : UICollectionViewCell {
         guard let gecerliKID = gecerliKullanici?.kullaniciID else { return }
         
         
+        Firestore.firestore().collection("Kullanicilar").document(oturumKID).collection("TakipEdiyor").document(oturumKID).getDocument { (snapshot, hata) in
+            
+        }
+        
+        
         
         if oturumKID != gecerliKID {
             
-            Firestore.firestore().collection("TakipEdiyor").document(oturumKID).getDocument { (snapshot,hata)  in
+            Firestore.firestore().collection("Kullanicilar").document(oturumKID).collection("TakipEdiyor").document(oturumKID).getDocument { (snapshot,hata)  in
                 if let hata = hata {
                     print("Takip Verisi Alınamadı : \(hata.localizedDescription)")
                     return
@@ -86,7 +96,7 @@ class KullanıcıProfilHeader : UICollectionViewCell {
         
         // Takip Ediyor İse Takipten Çıkartır
         if btnProfilDuzenle.titleLabel?.text == "Takipten Çık" {
-            Firestore.firestore().collection("TakipEdiyor").document(oturumuAcanKID).updateData([gecerliKID : FieldValue.delete()]) { (hata) in
+            Firestore.firestore().collection("Kullanicilar").document(oturumuAcanKID).collection("TakipEdiyor").document(oturumuAcanKID).updateData([gecerliKID : FieldValue.delete()]) { (hata) in
                 if let hata = hata {
                     print("Takipten Çıkartırken Hata Meydana Geldi : \(hata.localizedDescription)")
                 }
@@ -104,20 +114,21 @@ class KullanıcıProfilHeader : UICollectionViewCell {
             takipciSayisi.updateData([
                 "TakipciSayisi" : FieldValue.increment(Int64(-1))
             ])
+            
             return
             
         }
         
         let eklenecekDeger = [gecerliKID : 1]
         
-        Firestore.firestore().collection("TakipEdiyor").document(oturumuAcanKID).getDocument { (snapshot, hata) in
+        Firestore.firestore().collection("Kullanicilar").document(oturumuAcanKID).collection("TakipEdiyor").document(oturumuAcanKID).getDocument { (snapshot, hata) in
             if let hata = hata {
                 print("Takip Verisi Alınamadı : \(hata.localizedDescription)")
                 return
             }
             // Takip Verisini Güncellemek İçin
             if snapshot?.exists == true {
-                Firestore.firestore().collection("TakipEdiyor").document(oturumuAcanKID).updateData(eklenecekDeger) {
+                Firestore.firestore().collection("Kullanicilar").document(oturumuAcanKID).collection("TakipEdiyor").document(oturumuAcanKID).updateData(eklenecekDeger) {
                     (hata) in
                     if let hata = hata {
                         print("Takip Verisi Güncellemesi Başarısız : \(hata.localizedDescription)")
@@ -139,11 +150,11 @@ class KullanıcıProfilHeader : UICollectionViewCell {
                 takipciSayisi.updateData([
                     "TakipciSayisi" : FieldValue.increment(Int64(1))
                 ])
-                
+                self.delegate?.getUserProfileData()
             }
             // Takip Etmeye Yeni Başladı İse
             else {
-                Firestore.firestore().collection("TakipEdiyor").document(oturumuAcanKID).setData(eklenecekDeger) { (hata) in
+                Firestore.firestore().collection("Kullanicilar").document(oturumuAcanKID).collection("TakipEdiyor").document(oturumuAcanKID).setData(eklenecekDeger) { (hata) in
                     if let hata = hata  {
                         print("Takip Verisi Kaydı Başarısız : \(hata.localizedDescription)")
                         return
@@ -157,16 +168,20 @@ class KullanıcıProfilHeader : UICollectionViewCell {
                 takipciSayisi.updateData([
                     "TakipciSayisi" : FieldValue.increment(Int64(1))
                 ])
+                self.delegate?.getUserProfileData()
             }
         }
         
     }
     
+        fileprivate func attrPaylasimOlustur() {
+            let attrText = NSMutableAttributedString(string: "\(gecerliKullanici?.paylasimCount ?? 0)\n",attributes: [.font : UIFont.boldSystemFont(ofSize: 16)])
+            attrText.append(NSAttributedString(string: "Paylaşım",attributes: [.foregroundColor : UIColor.darkGray, .font : UIFont.systemFont(ofSize: 14)]))
+            lblPaylasim.attributedText = attrText
+        }
+    
         let lblPaylasim : UILabel = {
             let lbl = UILabel()
-            let attrText = NSMutableAttributedString(string: "1\n",attributes: [.font : UIFont.boldSystemFont(ofSize: 16)])
-            attrText.append(NSAttributedString(string: "Paylaşım",attributes: [.foregroundColor : UIColor.darkGray, .font : UIFont.systemFont(ofSize: 14)]))
-            lbl.attributedText = attrText
             lbl.textAlignment = .center
             lbl.numberOfLines = 0
         return lbl
@@ -265,6 +280,7 @@ class KullanıcıProfilHeader : UICollectionViewCell {
         addSubview(stackView)
         stackView.distribution = .fillEqually
         stackView.anchor(top: topAnchor, bottom: nil, leading: imgProfilGoruntu.trailingAnchor, trailing: trailingAnchor, paddingTop: 15, paddingBottom: 0, paddingLeft: 15, paddingRight: -15, width: 0, height: 50)
+        
     }
     
     fileprivate func toolbarOlustur() {
@@ -275,7 +291,7 @@ class KullanıcıProfilHeader : UICollectionViewCell {
         let altAyracView = UIView()
         altAyracView.backgroundColor = UIColor.lightGray
         
-        let stackView = UIStackView(arrangedSubviews: [btnGrid,btnListe,btnYerIsareti])
+        let stackView = UIStackView(arrangedSubviews: [btnGrid,btnListe])
         
         addSubview(stackView)
         addSubview(ustAyracView)

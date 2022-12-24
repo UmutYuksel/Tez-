@@ -73,7 +73,6 @@
 		92E14C8928F9AC0A0072069F /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 92E14C8828F9AC0A0072069F /* SDWebImage */; };
 		92E14C8B28F9AC0B0072069F /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 92E14C8A28F9AC0B0072069F /* SDWebImageMapKit */; };
 		92E14C8E28F9AC880072069F /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 92E14C8D28F9AC880072069F /* JGProgressHUD */; };
-		92F473DD29565FC4002E20FB /* Follower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F473DC29565FC4002E20FB /* Follower.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,7 +154,6 @@
 		92C7A218294F9B0600B75ED5 /* NewMessageNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageNavBar.swift; sourceTree = "<group>"; };
 		92E14C6A28F97E280072069F /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		92E14C6C28F98E9D0072069F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		92F473DC29565FC4002E20FB /* Follower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Follower.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,7 +228,6 @@
 				9215C5E52951D1D000684938 /* Message.swift */,
 				9215C5E92951E0ED00684938 /* Message_Eslesme.swift */,
 				924C28F6295231B60093617D /* LastMessage.swift */,
-				92F473DC29565FC4002E20FB /* Follower.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -537,7 +534,6 @@
 				92537986294F3E75005C4C92 /* NewMessageController.swift in Sources */,
 				927F631B293101AD0069BC95 /* Yorum.swift in Sources */,
 				926B0198294A386E0029C237 /* TextFieldIntent.swift in Sources */,
-				92F473DD29565FC4002E20FB /* Follower.swift in Sources */,
 				924F7CE828FD6823003E043E /* KullanıcıProfilController.swift in Sources */,
 				92B6F19428F874DC00CDAF7A /* KayitOlController.swift in Sources */,
 				924C28F529521B460093617D /* LastMessageNavBar.swift in Sources */,

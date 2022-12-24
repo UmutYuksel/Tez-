@@ -13,12 +13,10 @@ import FirebaseFirestore
 class KullanıcıProfilController : UICollectionViewController {
     
     let listePaylasimHucreID = "listePaylasimHucreID"
-    
     var gridGorunum = true
-    
     var kullaniciID : String?
-    
     let paylasimHucreID = "paylaşımHücreID"
+    var gecerliKullanici : Kullanici?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +27,18 @@ class KullanıcıProfilController : UICollectionViewController {
         collectionView.register(KullaniciPaylasimFotoCell.self, forCellWithReuseIdentifier: paylasimHucreID)
         collectionView.register(AnaPaylasimCell.self, forCellWithReuseIdentifier: listePaylasimHucreID)
         btnOturumKapatOlustur()
-
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshProfile), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
     }
 
+    @objc fileprivate func refreshProfile() {
+        paylasimlar.removeAll()
+        collectionView.reloadData()
+        kullaniciyiGetir()
+        self.collectionView.refreshControl?.endRefreshing()
+    }
     
     var paylasimlar = [Paylasim]()
     
@@ -105,7 +112,11 @@ class KullanıcıProfilController : UICollectionViewController {
             let genislik = (view.frame.width - 5) / 3
             return CGSize(width: genislik, height: genislik)
         } else {
-            return CGSize(width: view.frame.width, height: view.frame.width+200)
+            var yukseklik : CGFloat = 55
+            yukseklik += view.frame.width
+            yukseklik += 50
+            yukseklik += 35
+            return CGSize(width: view.frame.width, height: yukseklik)
         }
     
     }
@@ -135,13 +146,12 @@ class KullanıcıProfilController : UICollectionViewController {
         header.delegate = self
         return header
     }
-    var kullanicilar = [Kullanici]()
-    var gecerliKullanici : Kullanici?
+    
+    
     fileprivate func kullaniciyiGetir() {
         
         let gecerliKullaniciID = kullaniciID ?? Auth.auth().currentUser?.uid ?? ""
-        //guard let gecerliKullaniciID = Auth.auth().currentUser?.uid else { return }
-        
+    
         
         Firestore.firestore().collection("Kullanicilar").document(gecerliKullaniciID).getDocument { (snapshot , hata ) in
             
@@ -154,6 +164,7 @@ class KullanıcıProfilController : UICollectionViewController {
             self.gecerliKullanici = Kullanici(kullaniciVerisi: kullaniciVerisi)
             self.paylasimlariGetirFS()
             self.navigationItem.title = self.gecerliKullanici?.kullaniciAdi
+            
             
         }
     }
@@ -180,19 +191,27 @@ extension KullanıcıProfilController : KullanıcıProfilHeaderDelegate {
     
     
     func getUserProfileData() {
+        guard let oturumuAcanKID = Auth.auth().currentUser?.uid else { return }
         
-        Firestore.firestore().collection("Kullanicilar").addSnapshotListener { (snapshot, err) in
-            if let err = err {
-                print("Kullanıcı Bilgileri Getirilirken Hata Meydana Geldi",err)
+        Firestore.firestore().collection("Kullanicilar").document(oturumuAcanKID).addSnapshotListener { documentSnapsot, error in
+            guard let document = documentSnapsot else {
+                print("Hata ")
                 return
             }
-            snapshot?.documentChanges.forEach({ (degisiklik) in
-                if degisiklik.type == .added || degisiklik.type == .modified {
-                    let kullanici = Kullanici(kullaniciVerisi: degisiklik.document.data())
-                    self.kullanicilar.append(kullanici)
-                }
-            })
+            guard let data = document.data() else {
+                print("Document Data Empty")
+                return
+            }
+            print("Current data: \(data)")
             self.collectionView.reloadData()
         }
+        
     }
+    
+    
 }
+                                                 
+
+
+
+

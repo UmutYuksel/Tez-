@@ -18,6 +18,7 @@ struct Kullanici {
     let takipci : String
     var takipEdiyorCount : Int
     var takipciCount : Int
+    var paylasimCount : Int
     
     init(kullaniciVerisi : [String : Any]) {
         
@@ -28,5 +29,6 @@ struct Kullanici {
         self.takipci = kullaniciVerisi["Takipci"] as? String ?? "0"
         self.takipEdiyorCount = kullaniciVerisi["TakipEdiyorSayisi"] as? Int ?? 0
         self.takipciCount = kullaniciVerisi["TakipciSayisi"] as? Int ?? 0
+        self.paylasimCount = kullaniciVerisi["PaylasimSayisi"] as? Int ?? 0
     }
 }

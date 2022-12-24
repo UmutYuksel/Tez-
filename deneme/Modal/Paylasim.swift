@@ -18,6 +18,7 @@ struct Paylasim {
     let mesaj : String?
     let paylasimTarihi : Timestamp
     var begenildi : Bool = false
+    var likeCount : Int
     
     
     init(kullanici : Kullanici, sozlukVerisi : [String : Any]) {
@@ -28,6 +29,7 @@ struct Paylasim {
         self.kullaniciID = sozlukVerisi["KullaniciID"] as? String
         self.mesaj = sozlukVerisi["Mesaj"] as? String
         self.paylasimTarihi = sozlukVerisi["PaylasimTarihi"] as? Timestamp ?? Timestamp(date: Date())
+        self.likeCount = sozlukVerisi["LikeCount"] as? Int ?? 0
         
     }
 }

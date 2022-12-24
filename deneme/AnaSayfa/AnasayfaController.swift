@@ -144,6 +144,10 @@ class AnasayfaController : UICollectionViewController {
             self.paylasimlariGetir(kullanici: kullanici)
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
 }
 
 extension AnasayfaController : UICollectionViewDelegateFlowLayout {
@@ -152,7 +156,7 @@ extension AnasayfaController : UICollectionViewDelegateFlowLayout {
         var yukseklik : CGFloat = 55
         yukseklik += view.frame.width
         yukseklik += 50
-        yukseklik += 70
+        yukseklik += 35
         return CGSize(width: view.frame.width, height: yukseklik)
     }
 }

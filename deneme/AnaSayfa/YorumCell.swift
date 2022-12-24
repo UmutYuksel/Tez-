@@ -15,9 +15,8 @@ class YorumCell : UICollectionViewCell {
             imgKullaniciProfil.sd_setImage(with: URL(string: yorum.kullanici.profilGoruntuURL), completed: nil)
             
             let attrText = NSMutableAttributedString(string: yorum.kullanici.kullaniciAdi, attributes: [.font : UIFont.boldSystemFont(ofSize: 15)])
-            
             attrText.append(NSAttributedString(string: " " + (yorum.yorumMesaji), attributes: [.font : UIFont.systemFont(ofSize: 15)]))
-            
+    
             lblComment.attributedText = attrText
         }
     }

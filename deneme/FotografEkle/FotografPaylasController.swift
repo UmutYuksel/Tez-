@@ -94,6 +94,7 @@ class FotografPaylasController : UIViewController {
     static let guncelleNotification = Notification.Name("PaylasimlariGuncelle")
   
     fileprivate func paylasimKaydetFS(goruntuURL : String) {
+        let db = Firestore.firestore()
         guard let paylasimFotograf = secilenFotograf else { return }
         guard let mesaj = txtMesaj.text,
               mesaj.trimmingCharacters(in: .whitespacesAndNewlines).count > 0 else { return }
@@ -119,5 +120,9 @@ class FotografPaylasController : UIViewController {
             
             NotificationCenter.default.post(name: FotografPaylasController.guncelleNotification, object: nil)
         })
+        let paylasimSayisi = db.collection("Kullanicilar").document(gecerliKullaniciID)
+        paylasimSayisi.updateData([
+            "PaylasimSayisi" : FieldValue.increment(Int64(1))
+        ])
     }
 }

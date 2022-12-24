@@ -126,8 +126,6 @@ class YorumlarController : UICollectionViewController {
             print("Yorum Başarı İle Eklendi")
             self.txtComment.text = ""
         }
-        
-        
     }
     
     override var inputAccessoryView: UIView? {

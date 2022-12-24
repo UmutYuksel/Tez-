@@ -141,17 +141,25 @@ class AnaPaylasimCell : UICollectionViewCell {
     }
    
     fileprivate func etkilesimButonlarıOlustur() {
-        let stackView = UIStackView(arrangedSubviews: [btnLike,BtnComment,BtnSentMessage])
+        let stackView = UIStackView(arrangedSubviews: [btnLike,BtnComment])
         stackView.distribution = .fillEqually
         addSubview(stackView)
-        stackView.anchor(top: imgPaylasimFoto.bottomAnchor, bottom: nil, leading: leadingAnchor, trailing: nil, paddingTop: 0, paddingBottom: 0, paddingLeft: 8, paddingRight: 0, width: 120, height: 50)
+        stackView.anchor(top: imgPaylasimFoto.bottomAnchor, bottom: nil, leading: leadingAnchor, trailing: nil, paddingTop: 0, paddingBottom: 0, paddingLeft: 8, paddingRight: 0, width: 80, height: 40)
         
         addSubview(btnBookmark)
-        btnBookmark.anchor(top: imgPaylasimFoto.bottomAnchor, bottom: nil, leading: nil, trailing: trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 40, height: 50)
+        btnBookmark.anchor(top: imgPaylasimFoto.bottomAnchor, bottom: nil, leading: nil, trailing: trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 40, height: 40)
         
         addSubview(lblDescription)
-        lblDescription.anchor(top: btnLike.bottomAnchor, bottom: bottomAnchor, leading: leadingAnchor, trailing: trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeft: 8, paddingRight: -8, width: 0, height: 0)
+        lblDescription.anchor(top: stackView.bottomAnchor, bottom: nil, leading: leadingAnchor, trailing: trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeft: 8, paddingRight: -8, width: 0, height: 0)
+        
+        
+        let altAyracView = UIView()
+        altAyracView.backgroundColor = UIColor.lightGray
+        addSubview(altAyracView)
+        
+        altAyracView.anchor(top: lblDescription.bottomAnchor, bottom: nil, leading: leadingAnchor, trailing: trailingAnchor, paddingTop: 5, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 0, height: 0.4)
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
