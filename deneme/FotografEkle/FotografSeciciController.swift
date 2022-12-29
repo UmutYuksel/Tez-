@@ -17,12 +17,37 @@ class FotografSeciciController : UICollectionViewController {
         super.viewDidLoad()
         
         collectionView.backgroundColor = .white
-        buttonAdd()
         collectionView.register(FotografSeciciCell.self, forCellWithReuseIdentifier: hucreID)
         collectionView.register(FotografSeciciHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
         fotograflariGetir()
+        editNavBar()
+        
+        navBar.btnBack.addTarget(self, action: #selector(btnBackPressed), for: .touchUpInside)
+        navBar.btnShare.addTarget(self, action: #selector(btnSharePressed), for: .touchUpInside)
+    }
+    @objc fileprivate func btnBackPressed() {
+        navigationController?.popViewController(animated: true)
     }
     
+    @objc fileprivate func btnSharePressed() {
+        let fotoPaylasController = FotografPaylasController()
+        fotoPaylasController.secilenFotograf = header?.imgHeader.image
+        navigationController?.pushViewController(fotoPaylasController, animated: true)
+    }
+    let navBar = FotografSeciciNavBar()
+    fileprivate let navBarHeight : CGFloat = 45
+    
+    fileprivate func editNavBar() {
+        view.addSubview(navBar)
+        navBar.anchor(top: view.safeAreaLayoutGuide.topAnchor, bottom: nil, leading: view.leadingAnchor, trailing: view.trailingAnchor,boyut: .init(width: 0, height: navBarHeight))
+        collectionView.contentInset.top = navBarHeight
+        
+        let statusBar = UIView(arkaPlanRenk: .white)
+        view.addSubview(statusBar)
+        statusBar.anchor(top: view.topAnchor, bottom: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
+        
+        collectionView.verticalScrollIndicatorInsets.top = navBarHeight
+    }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         secilenFotograf = fotograflar[indexPath.row]
@@ -37,7 +62,7 @@ class FotografSeciciController : UICollectionViewController {
     
     fileprivate func fotografGetirmeSecenekOlustur() -> PHFetchOptions {
         let getirmeSecenekleri = PHFetchOptions()
-        getirmeSecenekleri.fetchLimit = 40
+        getirmeSecenekleri.fetchLimit = 120
         
         let siralamaAyari = NSSortDescriptor(key: "creationDate", ascending: false)
         getirmeSecenekleri.sortDescriptors = [siralamaAyari]
@@ -109,7 +134,7 @@ class FotografSeciciController : UICollectionViewController {
                 let secilenAsset = self.assetler[index]
                 
                 let fotoManager = PHImageManager.default()
-                let boyut = CGSize(width: 600, height: 600)
+                let boyut = CGSize(width: 1200, height: 600)
                 fotoManager.requestImage(for: secilenAsset, targetSize: boyut, contentMode: .default, options: nil) {
                     (foto, bilgi) in
                     header.imgHeader.image = foto
@@ -133,22 +158,16 @@ class FotografSeciciController : UICollectionViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tabBarController?.tabBar.isHidden = false
+        navigationController?.navigationBar.isHidden = false
+    }
     
-    fileprivate func buttonAdd() {
-        navigationController?.navigationBar.tintColor = .black
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "İptal Et",style: .plain, target: self, action: #selector(btnIptalPressed))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sonraki", style: .plain, target: self, action: #selector(btnSonrakiPressed))
-    }
-    @objc func btnSonrakiPressed() {
-        
-        let fotoPaylasController = FotografPaylasController()
-        fotoPaylasController.secilenFotograf = header?.imgHeader.image
-        navigationController?.pushViewController(fotoPaylasController, animated: true)
-         
-        
-    }
-    @objc func btnIptalPressed() {
-        dismiss(animated: true,completion: nil)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
+        navigationController?.navigationBar.isHidden = true
     }
 }
 

@@ -67,6 +67,16 @@ class KayitOlController: UIViewController {
         return txt
     }()
     
+    let txtIsımSoyisim : UITextField = {
+        let txt = UITextField()
+        txt.placeholder = "İsim Soyisim Giriniz"
+        txt.backgroundColor = UIColor(white: 0, alpha: 0.05)
+        txt.font = UIFont.systemFont(ofSize: 16)
+        txt.borderStyle = .roundedRect
+        txt.addTarget(self, action: #selector(veriDegisimi), for: .editingChanged)
+        return txt
+    }()
+    
     let txtParola : UITextField = {
         
         let txt = UITextField()
@@ -97,6 +107,7 @@ class KayitOlController: UIViewController {
        
         guard let emailAdresi = txtEmail.text else { return }
         guard let KullaniciAdi = txtKullaniciAdi.text else { return }
+        guard let KullaniciIsım = txtIsımSoyisim.text else { return }
         guard let parola = txtParola.text else { return }
         
         
@@ -109,7 +120,19 @@ class KayitOlController: UIViewController {
                 hud.dismiss(animated: true)
                 return
             }
-            
+            guard let user = Auth.auth().currentUser else { return }
+            hud.dismiss(animated: true)
+            switch user.isEmailVerified {
+                case true:
+                print("user email is vefified")
+                case false:
+                user.sendEmailVerification { (err) in
+                    hud.textLabel.text = "Kaydınız Gerçekleştirildi \n Lütfen E-Mail Onayını Tamamlayınız"
+                    hud.show(in: self.view)
+                    hud.dismiss(afterDelay: 0.5)
+                }
+                
+            }
             guard let kaydolanKullaniciID = sonuc?.user.uid else { return }
             
             let goruntuAdi = UUID().uuidString
@@ -134,6 +157,9 @@ class KayitOlController: UIViewController {
                 
                     let eklenecekVeri = ["KullaniciAdi " : KullaniciAdi,
                                          "KullaniciID" : kaydolanKullaniciID,
+                                         "IsımSoyisim" : KullaniciIsım,
+                                         "E-Mail" : emailAdresi,
+                                         "Parola" : parola,
                                          "ProfilGoruntuUrl" : url?.absoluteString ?? ""]
                     
                     Firestore.firestore().collection("Kullanicilar").document(kaydolanKullaniciID)
@@ -144,16 +170,10 @@ class KayitOlController: UIViewController {
                                 return
                             }
                             print("Kullanıcı Verileri FireStore'a Kaydedildi")
-                            hud.dismiss(animated: true)
                             self.gorunumuDüzelt()
-                            let keyWindow = UIApplication.shared.connectedScenes.filter({$0.activationState == .foregroundActive})
-                                .map({$0 as? UIWindowScene})
-                                .compactMap({$0})
-                                .first?.windows
-                                .filter({$0.isKeyWindow}).first
-                            guard let anaTabBarController = keyWindow?.rootViewController as? AnaTabBarController else { return }
-                            anaTabBarController.gorunumuOlustur() // KullanıcıProfilContollera Gidilir
-                            self.dismiss(animated: true, completion: nil) // Oturum Açma Ekranını Kapatmak İçin
+                            let oturumAcController = OturumAcController()
+                            self.view.backgroundColor = .white
+                            self.navigationController?.pushViewController(oturumAcController, animated: true)
                             
                         }
                 }
@@ -168,11 +188,8 @@ class KayitOlController: UIViewController {
         self.btnFotografEkle.layer.borderWidth = 0
         self.txtEmail.text = ""
         self.txtKullaniciAdi.text = ""
+        self.txtIsımSoyisim.text = ""
         self.txtParola.text = ""
-        let basariliHud = JGProgressHUD(style: .light)
-        basariliHud.textLabel.text = "Kayıt İşlemi Başarılı"
-        basariliHud.show(in: self.view)
-        basariliHud.dismiss(afterDelay: 0.5)
     }
     
     let btnHesabimVar : UIButton = {
@@ -181,7 +198,6 @@ class KayitOlController: UIViewController {
         attrBaslik.append(NSMutableAttributedString(string: " Oturum Aç.",attributes: [.font : UIFont.boldSystemFont(ofSize: 16), .foregroundColor : UIColor.rgbDonustur(red: 20, green: 155, blue: 235)]))
         btn.setAttributedTitle(attrBaslik, for: .normal)
         btn.addTarget(self, action: #selector(btnHesabimVarPressed), for: .touchUpInside)
-        
         return btn
     }()
     
@@ -204,16 +220,19 @@ class KayitOlController: UIViewController {
 
     fileprivate func girisAlanlariniOlustur() {
         
-        let stackView = UIStackView(arrangedSubviews: [txtEmail,txtKullaniciAdi,txtParola,btnKayitOl])
+        let stackView = UIStackView(arrangedSubviews: [txtEmail,txtKullaniciAdi,txtIsımSoyisim,txtParola,btnKayitOl])
         stackView.distribution = .fillEqually
         stackView.axis = .vertical
         stackView.spacing = 10
         view.addSubview(stackView)
         
         
-        stackView.anchor(top: btnFotografEkle.bottomAnchor, bottom: nil, leading: view.leadingAnchor, trailing: view.trailingAnchor, paddingTop: 20, paddingBottom: 0, paddingLeft: 45, paddingRight: -45, width: 0, height: 230)
+        stackView.anchor(top: btnFotografEkle.bottomAnchor, bottom: nil, leading: view.leadingAnchor, trailing: view.trailingAnchor, paddingTop: 20, paddingBottom: 0, paddingLeft: 45, paddingRight: -45, width: 0, height: 315)
     }
-
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
 
 extension UIView {

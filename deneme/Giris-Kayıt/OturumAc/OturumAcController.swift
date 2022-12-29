@@ -64,24 +64,31 @@ class OturumAcController : UIViewController {
                 basarisizHud.dismiss(afterDelay: 2)
                 return
             }
-            print("Kullanıcı Oturumu Açıldı",sonuc?.user.uid)
-            
-            let keyWindow = UIApplication.shared.connectedScenes.filter({$0.activationState == .foregroundActive})
-                .map({$0 as? UIWindowScene})
-                .compactMap({$0})
-                .first?.windows
-                .filter({$0.isKeyWindow}).first
-            guard let anaTabBarController = keyWindow?.rootViewController as? AnaTabBarController else { return }
-            anaTabBarController.gorunumuOlustur() // KullanıcıProfilContollera Gidilir
-            self.dismiss(animated: true, completion: nil) // Oturum Açma Ekranını Kapatmak İçin
-            
-            
+            guard let user = Auth.auth().currentUser else { return }
             hud.dismiss(animated: true)
-            let basariliHud = JGProgressHUD(style: .light)
-            basariliHud.textLabel.text = "Oturum Açma Başarılı"
-            basariliHud.show(in: self.view)
-            basariliHud.dismiss(afterDelay: 1)
-            
+            switch user.isEmailVerified {
+                case true:
+                let keyWindow = UIApplication.shared.connectedScenes.filter({$0.activationState == .foregroundActive})
+                    .map({$0 as? UIWindowScene})
+                    .compactMap({$0})
+                    .first?.windows
+                    .filter({$0.isKeyWindow}).first
+                guard let anaTabBarController = keyWindow?.rootViewController as? AnaTabBarController else { return }
+                anaTabBarController.viewDidLoad() // KullanıcıProfilContollera Gidilir
+                self.dismiss(animated: true, completion: nil) // Oturum Açma Ekranını Kapatmak İçin
+                
+                
+                hud.dismiss(animated: true)
+                let basariliHud = JGProgressHUD(style: .light)
+                basariliHud.textLabel.text = "Oturum Açma Başarılı"
+                basariliHud.show(in: self.view)
+                basariliHud.dismiss(afterDelay: 1)
+                
+                case false:
+                    hud.textLabel.text = "E-Mail Onayı Doğrulanamadı Lütfen Onayınızı Yapınız."
+                    hud.show(in: self.view)
+                    hud.dismiss(afterDelay: 1.5)
+            }
         }
     }
     
@@ -98,14 +105,25 @@ class OturumAcController : UIViewController {
         return view
     }()
     
+    let btnSifreSıfırla : UIButton = {
+        let btn = UIButton(type: .system)
+        let attrBaslik = NSMutableAttributedString(string: "Şifreni mi Unuttun?",attributes: [.font : UIFont.systemFont(ofSize: 16),.foregroundColor : UIColor.rgbDonustur(red: 20, green: 155, blue: 235)])
+        btn.setAttributedTitle(attrBaslik, for: .normal)
+        btn.addTarget(self, action: #selector(btnSifreSıfırlaPressed), for: .touchUpInside)
+        return btn
+    }()
+    
+    @objc fileprivate func btnSifreSıfırlaPressed() {
+        let passwordController = ResetPasswordController()
+        view.backgroundColor = .white
+        navigationController?.pushViewController(passwordController, animated: true)
+    }
+    
     let btnKayitOl : UIButton = {
         let btn = UIButton(type: .system)
-        
         let attrBaslik = NSMutableAttributedString(string: "Henüz bir hesabınız yok mu?",attributes: [.font : UIFont.systemFont(ofSize: 16),.foregroundColor : UIColor.lightGray])
         attrBaslik.append(NSMutableAttributedString(string: " Kayıt Ol.",attributes: [.font : UIFont.boldSystemFont(ofSize: 16), .foregroundColor : UIColor.rgbDonustur(red: 20, green: 155, blue: 235)]))
         btn.setAttributedTitle(attrBaslik, for: .normal)
-            
-        
         btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         btn.addTarget(self, action: #selector(btnKayitOlPressed), for: .touchUpInside)
         return btn
@@ -125,7 +143,6 @@ class OturumAcController : UIViewController {
     
     @objc fileprivate func btnKayitOlPressed() {
         let kayitOlController = KayitOlController()
-        
         navigationController?.pushViewController(kayitOlController, animated: true)
     }
     
@@ -133,26 +150,37 @@ class OturumAcController : UIViewController {
         return .lightContent
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
         view.addSubview(logoView)
-        logoView.anchor(top: view.topAnchor, bottom: nil, leading: view.leadingAnchor, trailing: view.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 0, height: 150)
+        logoView.anchor(top: view.safeAreaLayoutGuide.topAnchor, bottom: nil, leading: view.leadingAnchor, trailing: view.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 0, height: 100)
         
         navigationController?.isNavigationBarHidden = true
         
         view.addSubview(btnKayitOl)
         btnKayitOl.anchor(top: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 0, height: 50)
         girisGorunumOlustur()
+        
     }
     
-    fileprivate func girisGorunumOlustur() {
+    func girisGorunumOlustur() {
         let stackView = UIStackView(arrangedSubviews: [txtEmail,txtParola,btnGirisYap])
         stackView.axis = .vertical
         stackView.spacing = 10
         stackView.distribution = .fillEqually
         view.addSubview(stackView)
         stackView.anchor(top: logoView.bottomAnchor, bottom: nil, leading: view.leadingAnchor, trailing: view.trailingAnchor, paddingTop: 40, paddingBottom: 0, paddingLeft: 40, paddingRight: -40, width: 0, height: 185)
+        view.addSubview(btnSifreSıfırla)
+        btnSifreSıfırla.anchor(top: stackView.bottomAnchor, bottom: nil, leading: view.leadingAnchor, trailing: view.trailingAnchor, paddingTop: 10, paddingBottom: 0, paddingLeft: 40, paddingRight: -40, width: 0, height: 20)
+        let statusBar = UIView(arkaPlanRenk: .rgb(red: 0, green: 120, blue: 175))
+        view.addSubview(statusBar)
+        statusBar.anchor(top: view.topAnchor, bottom: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
     }
 }

@@ -14,18 +14,44 @@ class AnasayfaController : UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(paylasimlariYenile), name: FotografPaylasController.guncelleNotification, object: nil)
         
         collectionView.backgroundColor = .white
         collectionView.register(AnaPaylasimCell.self, forCellWithReuseIdentifier: hucreID)
-        navBarDuzenle()
+
         kullaniciyiGetir() // Oturumu açan Kullanıcının Paylaşımları Getirilir
         takipEdilenKIDDegerleriGetir()
+        editNavBar()
+        
+        navBar.btnMessages.addTarget(self, action: #selector(btnMessagePressed), for: .touchUpInside)
+        navBar.btnSharePhoto.addTarget(self, action: #selector(btnSharePhotoPressed), for: .touchUpInside)
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(paylasimlariYenile), for: .valueChanged)
         collectionView.refreshControl = refreshControl
     }
+    
+    @objc fileprivate func btnMessagePressed() {
+        let messageController = LastMessagesController()
+        view.backgroundColor = .white
+        navigationController?.pushViewController(messageController, animated: true)
+    }
+    
+    @objc fileprivate func btnSharePhotoPressed() {
+        let layout = UICollectionViewFlowLayout()
+        let newShareController = FotografSeciciController(collectionViewLayout: layout)
+        let navController = UINavigationController(rootViewController: newShareController)
+        navController.modalPresentationStyle = .fullScreen
+        view.backgroundColor = .white
+        navigationController?.pushViewController(newShareController, animated: true)
+    }
+    fileprivate func ekleControllerOlustur()-> UINavigationController {
+            let rootController = UIViewController()
+            let navController = UINavigationController(rootViewController: rootController)
+            navController.tabBarItem.image = UIImage(named: "add.png")
+            return navController
+        }
     
     @objc fileprivate func paylasimlariYenile() {
         print("Paylaşımlar Yenileniyor")
@@ -33,6 +59,30 @@ class AnasayfaController : UICollectionViewController {
         collectionView.reloadData()
         takipEdilenKIDDegerleriGetir()
         kullaniciyiGetir()
+    }
+    
+    let navBar = HomeScreenNavBar()
+    fileprivate let navBarHeight : CGFloat = 45
+    
+    fileprivate func editNavBar() {
+        view.addSubview(navBar)
+        navBar.anchor(top: view.safeAreaLayoutGuide.topAnchor, bottom: nil, leading: view.leadingAnchor, trailing: view.trailingAnchor,boyut: .init(width: 0, height: navBarHeight))
+        collectionView.contentInset.top = navBarHeight
+        
+        let statusBar = UIView(arkaPlanRenk: .white)
+        view.addSubview(statusBar)
+        statusBar.anchor(top: view.topAnchor, bottom: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
+        
+        collectionView.verticalScrollIndicatorInsets.top = navBarHeight
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     fileprivate func takipEdilenKIDDegerleriGetir() {
@@ -100,18 +150,6 @@ class AnasayfaController : UICollectionViewController {
                     }
                 })
             }
-    }
-    
-    fileprivate func navBarDuzenle() {
-        navigationItem.titleView = UIImageView(image: UIImage(named: "food-c.png"))
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "messages.png")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(messageController))
-    }
-    
-    @objc fileprivate func messageController() {
-        let messageController = LastMessagesController()
-        view.backgroundColor = .white
-        navigationController?.pushViewController(messageController, animated: true)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

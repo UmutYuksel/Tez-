@@ -32,9 +32,9 @@ class AnaPaylasimCell : UICollectionViewCell {
             attrPaylasimMesajıOlustur()
             
             if paylasim?.begenildi == true {
-                btnLike.setImage(UIImage(named: "heart-selected24.png")?.withRenderingMode(.alwaysOriginal), for: .normal)
+                btnLike.setImage(UIImage(named: "heart-selected-c.png")?.withRenderingMode(.alwaysOriginal), for: .normal)
             } else {
-                btnLike.setImage(UIImage(named: "heart24.png")?.withRenderingMode(.alwaysOriginal), for: .normal)
+                btnLike.setImage(UIImage(named: "heart-c.png")?.withRenderingMode(.alwaysOriginal), for: .normal)
             }
             
         }
@@ -55,14 +55,9 @@ class AnaPaylasimCell : UICollectionViewCell {
         lbl.numberOfLines = 0
         return lbl
     }()
-    let btnBookmark : UIButton = {
-        let btn = UIButton(type: .system)
-        btn.setImage(UIImage(named: "bookmark.png")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        return btn
-    }()
     lazy var btnLike : UIButton = {
         let btn = UIButton(type: .system)
-        btn.setImage(UIImage(named: "heart24.png")?.withRenderingMode(.alwaysOriginal),for: .normal)
+        btn.setImage(UIImage(named: "heart-c.png")?.withRenderingMode(.alwaysOriginal),for: .normal)
         btn.addTarget(self, action: #selector(btnLikePressed), for: .touchUpInside)
         return btn
     }()
@@ -71,15 +66,9 @@ class AnaPaylasimCell : UICollectionViewCell {
         print("Paylaşım beğendi")
         delegate?.LikePressed(cell: self)
     }
-    
-    let BtnSentMessage :  UIButton = {
-        let btn = UIButton(type: .system)
-        btn.setImage(UIImage(named: "sent 1.png")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        return btn
-    }()
     lazy var BtnComment : UIButton =  {
         let btn = UIButton(type: .system)
-        btn.setImage(UIImage(named: "comment 1.png")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        btn.setImage(UIImage(named: "comment-c.png")?.withRenderingMode(.alwaysOriginal), for: .normal)
         btn.addTarget(self, action: #selector(btnCommentPressed), for:.touchUpInside)
         return btn
     }()
@@ -144,19 +133,14 @@ class AnaPaylasimCell : UICollectionViewCell {
         let stackView = UIStackView(arrangedSubviews: [btnLike,BtnComment])
         stackView.distribution = .fillEqually
         addSubview(stackView)
-        stackView.anchor(top: imgPaylasimFoto.bottomAnchor, bottom: nil, leading: leadingAnchor, trailing: nil, paddingTop: 0, paddingBottom: 0, paddingLeft: 8, paddingRight: 0, width: 80, height: 40)
-        
-        addSubview(btnBookmark)
-        btnBookmark.anchor(top: imgPaylasimFoto.bottomAnchor, bottom: nil, leading: nil, trailing: trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 40, height: 40)
-        
+        stackView.anchor(top: imgPaylasimFoto.bottomAnchor, bottom: nil, leading: leadingAnchor, trailing: nil, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 80, height: 40)
+
         addSubview(lblDescription)
         lblDescription.anchor(top: stackView.bottomAnchor, bottom: nil, leading: leadingAnchor, trailing: trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeft: 8, paddingRight: -8, width: 0, height: 0)
-        
-        
+
         let altAyracView = UIView()
         altAyracView.backgroundColor = UIColor.lightGray
         addSubview(altAyracView)
-        
         altAyracView.anchor(top: lblDescription.bottomAnchor, bottom: nil, leading: leadingAnchor, trailing: trailingAnchor, paddingTop: 5, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 0, height: 0.4)
     }
     

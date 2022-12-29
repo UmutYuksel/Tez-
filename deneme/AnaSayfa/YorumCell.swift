@@ -47,6 +47,11 @@ class YorumCell : UICollectionViewCell {
         addSubview(lblComment)
         
         lblComment.anchor(top: topAnchor, bottom: bottomAnchor, leading: imgKullaniciProfil.trailingAnchor, trailing: trailingAnchor, paddingTop: 5, paddingBottom: -5, paddingLeft: 10, paddingRight: -5, width: 0, height: 0)
+        
+        let ayracView = UIView()
+        ayracView.backgroundColor = UIColor(white: 0, alpha: 0.45)
+        addSubview(ayracView)
+        ayracView.anchor(top: nil, bottom: bottomAnchor, leading: lblComment.leadingAnchor, trailing: trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 0, height: 0.45)
     }
     
     required init?(coder: NSCoder) {

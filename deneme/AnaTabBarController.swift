@@ -13,7 +13,7 @@ class AnaTabBarController : UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.delegate = self
+        
         
         if Auth.auth().currentUser == nil {
             DispatchQueue.main.async {
@@ -26,24 +26,35 @@ class AnaTabBarController : UITabBarController {
             }
             return
         }
-        
-        gorunumuOlustur()
-        
+        guard let user = Auth.auth().currentUser else { return }
+        switch user.isEmailVerified {
+        case true:
+            gorunumuOlustur()
+        case false:
+            DispatchQueue.main.async {
+                let oturumAcController = OturumAcController()
+                
+                let navController = UINavigationController(rootViewController: oturumAcController)
+                navController.modalPresentationStyle = .fullScreen
+                self.present(navController, animated: true, completion: nil)
+                
+            }
+            return
+        }
     }
     
     func gorunumuOlustur() {
         
         let anaNavController = navControllerOlustur(rootViewController: AnasayfaController(collectionViewLayout: UICollectionViewFlowLayout()))
         let araNavController = araControllerOlustur(rootViewController: KullanıcıAramaController(collectionViewLayout: UICollectionViewFlowLayout()))
-        let ekleNavController = ekleControllerOlustur()
         let layout = UICollectionViewFlowLayout()
         let kullaniciProfilController = KullanıcıProfilController(collectionViewLayout: layout)
         
         let kullaniciProfilNavController = UINavigationController(rootViewController: kullaniciProfilController)
         kullaniciProfilNavController.tabBarItem.image = UIImage(named: "user.png")
         kullaniciProfilNavController.tabBarItem.selectedImage = UIImage(named: "user-selected.png")
-        tabBar.tintColor = .black
-        viewControllers = [anaNavController,araNavController,ekleNavController,kullaniciProfilNavController]
+        tabBar.tintColor = UIColor.orangeTint()
+        viewControllers = [anaNavController,araNavController,kullaniciProfilNavController]
         
         guard let items = tabBar.items else { return }
         
@@ -65,28 +76,5 @@ class AnaTabBarController : UITabBarController {
         navController.tabBarItem.image = UIImage(named: "search.png")
         navController.tabBarItem.selectedImage = UIImage(named: "search-selected.png")
         return navController
-    }
-    fileprivate func ekleControllerOlustur()-> UINavigationController {
-        let rootController = UIViewController()
-        let navController = UINavigationController(rootViewController: rootController)
-        navController.tabBarItem.image = UIImage(named: "add.png")
-        return navController
-    }
-}
-
-extension AnaTabBarController : UITabBarControllerDelegate {
-    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        
-        guard let index = viewControllers?.firstIndex(of: viewController) else { return true}
-        if index == 2 {
-            
-            let layout = UICollectionViewFlowLayout()
-            let fotografSeciciController = FotografSeciciController(collectionViewLayout: layout)
-            let navController = UINavigationController(rootViewController: fotografSeciciController)
-            navController.modalPresentationStyle = .fullScreen
-            present(navController, animated: true, completion: nil)
-            return false
-        }
-        return true
     }
 }

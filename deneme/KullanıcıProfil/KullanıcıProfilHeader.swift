@@ -14,7 +14,6 @@ import FirebaseFirestore
 protocol KullanıcıProfilHeaderDelegate {
     func gridGorunumuneGec()
     func listeGorunumuneGec()
-    func getUserProfileData()
 
 }
 
@@ -24,11 +23,10 @@ class KullanıcıProfilHeader : UICollectionViewCell {
     
     var gecerliKullanici : Kullanici? {
         didSet{
-            
             takipButonuAyarla()
             guard let url = URL(string: gecerliKullanici?.profilGoruntuURL ?? "") else { return }
             imgProfilGoruntu.sd_setImage(with: url, completed: nil)
-            lblKullaniciAdi.text = gecerliKullanici?.kullaniciAdi
+            lblBio.text = gecerliKullanici?.Bio
             attrTakipEdiyorOlustur()
             attrTakipciOlustur()
             attrPaylasimOlustur()
@@ -37,26 +35,19 @@ class KullanıcıProfilHeader : UICollectionViewCell {
     }
     
     fileprivate func takipButonuAyarla() {
-        
         guard let oturumKID = Auth.auth().currentUser?.uid else { return }
         guard let gecerliKID = gecerliKullanici?.kullaniciID else { return }
         
         
-        Firestore.firestore().collection("Kullanicilar").document(oturumKID).collection("TakipEdiyor").document(oturumKID).getDocument { (snapshot, hata) in
-            
+        Firestore.firestore().collection("TakipEdiyor").document(oturumKID).getDocument { (snapshot, hata) in
         }
-        
-        
-        
         if oturumKID != gecerliKID {
-            
-            Firestore.firestore().collection("Kullanicilar").document(oturumKID).collection("TakipEdiyor").document(oturumKID).getDocument { (snapshot,hata)  in
+            Firestore.firestore().collection("TakipEdiyor").document(oturumKID).getDocument { [self] (snapshot,hata)  in
                 if let hata = hata {
                     print("Takip Verisi Alınamadı : \(hata.localizedDescription)")
                     return
                 }
                 guard let takipVerileri = snapshot?.data() else { return }
-                
                 if let veri = takipVerileri[gecerliKID] {
                     let takip = veri as! Int
                     print(takip)
@@ -72,7 +63,7 @@ class KullanıcıProfilHeader : UICollectionViewCell {
                 }
             }
         } else {
-            self.btnProfilDuzenle.setTitle("Profili Düzenle", for: .normal)
+            btnProfilDuzenle.setTitle("\(String(describing: gecerliKullanici?.kullaniciIsım ?? ""))", for: .normal)
             btnProfilDuzenle.isEnabled = false
         }
     }
@@ -86,8 +77,7 @@ class KullanıcıProfilHeader : UICollectionViewCell {
             btn.addTarget(self, action: #selector(btnProfil_Takip_Duzenle), for: .touchUpInside)
             return btn
         }()
-
- 
+    
     @objc fileprivate func btnProfil_Takip_Duzenle() {
         
         guard let oturumuAcanKID = Auth.auth().currentUser?.uid else { return }
@@ -96,7 +86,7 @@ class KullanıcıProfilHeader : UICollectionViewCell {
         
         // Takip Ediyor İse Takipten Çıkartır
         if btnProfilDuzenle.titleLabel?.text == "Takipten Çık" {
-            Firestore.firestore().collection("Kullanicilar").document(oturumuAcanKID).collection("TakipEdiyor").document(oturumuAcanKID).updateData([gecerliKID : FieldValue.delete()]) { (hata) in
+            Firestore.firestore().collection("TakipEdiyor").document(oturumuAcanKID).updateData([gecerliKID : FieldValue.delete()]) { (hata) in
                 if let hata = hata {
                     print("Takipten Çıkartırken Hata Meydana Geldi : \(hata.localizedDescription)")
                 }
@@ -121,14 +111,14 @@ class KullanıcıProfilHeader : UICollectionViewCell {
         
         let eklenecekDeger = [gecerliKID : 1]
         
-        Firestore.firestore().collection("Kullanicilar").document(oturumuAcanKID).collection("TakipEdiyor").document(oturumuAcanKID).getDocument { (snapshot, hata) in
+        Firestore.firestore().collection("TakipEdiyor").document(oturumuAcanKID).getDocument { (snapshot, hata) in
             if let hata = hata {
                 print("Takip Verisi Alınamadı : \(hata.localizedDescription)")
                 return
             }
             // Takip Verisini Güncellemek İçin
             if snapshot?.exists == true {
-                Firestore.firestore().collection("Kullanicilar").document(oturumuAcanKID).collection("TakipEdiyor").document(oturumuAcanKID).updateData(eklenecekDeger) {
+                Firestore.firestore().collection("TakipEdiyor").document(oturumuAcanKID).updateData(eklenecekDeger) {
                     (hata) in
                     if let hata = hata {
                         print("Takip Verisi Güncellemesi Başarısız : \(hata.localizedDescription)")
@@ -150,11 +140,10 @@ class KullanıcıProfilHeader : UICollectionViewCell {
                 takipciSayisi.updateData([
                     "TakipciSayisi" : FieldValue.increment(Int64(1))
                 ])
-                self.delegate?.getUserProfileData()
             }
             // Takip Etmeye Yeni Başladı İse
             else {
-                Firestore.firestore().collection("Kullanicilar").document(oturumuAcanKID).collection("TakipEdiyor").document(oturumuAcanKID).setData(eklenecekDeger) { (hata) in
+                Firestore.firestore().collection("TakipEdiyor").document(oturumuAcanKID).setData(eklenecekDeger) { (hata) in
                     if let hata = hata  {
                         print("Takip Verisi Kaydı Başarısız : \(hata.localizedDescription)")
                         return
@@ -168,7 +157,6 @@ class KullanıcıProfilHeader : UICollectionViewCell {
                 takipciSayisi.updateData([
                     "TakipciSayisi" : FieldValue.increment(Int64(1))
                 ])
-                self.delegate?.getUserProfileData()
             }
         }
         
@@ -213,10 +201,13 @@ class KullanıcıProfilHeader : UICollectionViewCell {
             return lbl
         }()
     
-        let lblKullaniciAdi : UILabel = {
+        let lblBio : UILabel = {
             let lbl = UILabel()
-            lbl.text = "Kullanıcı Adı"
-            lbl.font = UIFont.boldSystemFont(ofSize: 15)
+            lbl.text = ""
+            lbl.font = UIFont.systemFont(ofSize: 13)
+            lbl.numberOfLines = 0
+            lbl.translatesAutoresizingMaskIntoConstraints = false
+            lbl.lineBreakMode = .byWordWrapping
             return lbl
         }()
     
@@ -267,8 +258,8 @@ class KullanıcıProfilHeader : UICollectionViewCell {
         imgProfilGoruntu.clipsToBounds = true
         toolbarOlustur()
         
-        addSubview(lblKullaniciAdi)
-        lblKullaniciAdi.anchor(top: imgProfilGoruntu.bottomAnchor, bottom: btnGrid.topAnchor, leading: leadingAnchor, trailing: trailingAnchor, paddingTop: 5, paddingBottom: 0, paddingLeft: 15, paddingRight: 15, width: 0, height: 0)
+        addSubview(lblBio)
+        lblBio.anchor(top: imgProfilGoruntu.bottomAnchor, bottom: btnGrid.topAnchor, leading: leadingAnchor, trailing: trailingAnchor, paddingTop: 5, paddingBottom: 0, paddingLeft: 15, paddingRight: -15, width: 0, height: 0)
         
         kullaniciDurumBilgisiGoster()
         addSubview(btnProfilDuzenle)

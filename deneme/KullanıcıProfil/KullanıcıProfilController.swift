@@ -77,6 +77,18 @@ class KullanıcıProfilController : UICollectionViewController {
     
     @objc fileprivate func oturumKapat() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let editProfile = UIAlertAction(title: "Profili Bilgilerini Değiştir", style: .default) { (_) in
+            let editProfile = EditUserDataController()
+            self.navigationController?.pushViewController(editProfile, animated: true)
+        }
+        let updatePassword = UIAlertAction(title: "Parola Güncelle", style: .destructive) { (_) in
+            let updatePassword = UpdatePasswordController()
+            self.navigationController?.pushViewController(updatePassword, animated: true)
+        }
+        let updateMail = UIAlertAction(title: "E-Mail Güncelle", style: .default) { (_) in
+            let updateMail = UpdateMailController()
+            self.navigationController?.pushViewController(updateMail, animated: true)
+        }
         let actionOturumuKapat = UIAlertAction(title: "Oturumu Kapat", style: .destructive) { (_) in
             
             guard let _ = Auth.auth().currentUser?.uid else { return }
@@ -93,6 +105,9 @@ class KullanıcıProfilController : UICollectionViewController {
         }
         let actionIptalEt = UIAlertAction(title: "İptal Et", style: .cancel, handler: nil)
         alertController.addAction(actionOturumuKapat)
+        alertController.addAction(editProfile)
+        alertController.addAction(updatePassword)
+        alertController.addAction(updateMail)
         alertController.addAction(actionIptalEt)
         present(alertController, animated: true, completion: nil)
         
@@ -188,27 +203,6 @@ extension KullanıcıProfilController : KullanıcıProfilHeaderDelegate {
         gridGorunum = false
         collectionView.reloadData()
     }
-    
-    
-    func getUserProfileData() {
-        guard let oturumuAcanKID = Auth.auth().currentUser?.uid else { return }
-        
-        Firestore.firestore().collection("Kullanicilar").document(oturumuAcanKID).addSnapshotListener { documentSnapsot, error in
-            guard let document = documentSnapsot else {
-                print("Hata ")
-                return
-            }
-            guard let data = document.data() else {
-                print("Document Data Empty")
-                return
-            }
-            print("Current data: \(data)")
-            self.collectionView.reloadData()
-        }
-        
-    }
-    
-    
 }
                                                  
 

@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		92100AFB295CF1F100E6C30D /* UpdatePasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92100AFA295CF1F100E6C30D /* UpdatePasswordController.swift */; };
+		92100AFF295D145400E6C30D /* UpdateMailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92100AFE295D145400E6C30D /* UpdateMailController.swift */; };
 		9215C5E62951D1D000684938 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9215C5E52951D1D000684938 /* Message.swift */; };
 		9215C5E82951E0B200684938 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9215C5E72951E0B200684938 /* MessageCell.swift */; };
 		9215C5EA2951E0ED00684938 /* Message_Eslesme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9215C5E92951E0ED00684938 /* Message_Eslesme.swift */; };
 		9215C5EC2951E11D00684938 /* TakipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9215C5EB2951E11D00684938 /* TakipCell.swift */; };
+		92216D61295BA5D70002D47E /* ResetPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92216D60295BA5D70002D47E /* ResetPasswordController.swift */; };
+		92216D63295BBAA50002D47E /* EditUserDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92216D62295BBAA50002D47E /* EditUserDataController.swift */; };
 		9244A36D2902E2D500E77961 /* OturumAcController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9244A36C2902E2D500E77961 /* OturumAcController.swift */; };
 		924B0B532906E86100B161BC /* FotografSeciciController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924B0B522906E86100B161BC /* FotografSeciciController.swift */; };
 		924C28F529521B460093617D /* LastMessageNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924C28F429521B460093617D /* LastMessageNavBar.swift */; };
@@ -62,6 +66,9 @@
 		92C42BF4290C192A008F22E8 /* AnasayfaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C42BF3290C192A008F22E8 /* AnasayfaController.swift */; };
 		92C42BF6290C1A52008F22E8 /* AnaPaylasimCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C42BF5290C1A52008F22E8 /* AnaPaylasimCell.swift */; };
 		92C7A219294F9B0700B75ED5 /* NewMessageNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C7A218294F9B0600B75ED5 /* NewMessageNavBar.swift */; };
+		92D39A29295C61F100BB23BE /* UpdateProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D39A28295C61F100BB23BE /* UpdateProfileCell.swift */; };
+		92DC829C295919DF007EA78A /* HomeScreenNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DC829B295919DF007EA78A /* HomeScreenNavBar.swift */; };
+		92DC82A0295921B2007EA78A /* FotografSeciciNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DC829F295921B2007EA78A /* FotografSeciciNavBar.swift */; };
 		92E14C6B28F97E280072069F /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E14C6A28F97E280072069F /* UIColor.swift */; };
 		92E14C6D28F98E9E0072069F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92E14C6C28F98E9D0072069F /* GoogleService-Info.plist */; };
 		92E14C7C28F9AB9D0072069F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 92E14C7B28F9AB9D0072069F /* FirebaseAnalytics */; };
@@ -93,10 +100,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		92100AFA295CF1F100E6C30D /* UpdatePasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePasswordController.swift; sourceTree = "<group>"; };
+		92100AFE295D145400E6C30D /* UpdateMailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMailController.swift; sourceTree = "<group>"; };
 		9215C5E52951D1D000684938 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		9215C5E72951E0B200684938 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		9215C5E92951E0ED00684938 /* Message_Eslesme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message_Eslesme.swift; sourceTree = "<group>"; };
 		9215C5EB2951E11D00684938 /* TakipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakipCell.swift; sourceTree = "<group>"; };
+		92216D60295BA5D70002D47E /* ResetPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordController.swift; sourceTree = "<group>"; };
+		92216D62295BBAA50002D47E /* EditUserDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserDataController.swift; sourceTree = "<group>"; };
 		9244A36C2902E2D500E77961 /* OturumAcController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OturumAcController.swift; sourceTree = "<group>"; };
 		924B0B522906E86100B161BC /* FotografSeciciController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FotografSeciciController.swift; sourceTree = "<group>"; };
 		924C28F429521B460093617D /* LastMessageNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastMessageNavBar.swift; sourceTree = "<group>"; };
@@ -152,6 +163,9 @@
 		92C42BF3290C192A008F22E8 /* AnasayfaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnasayfaController.swift; sourceTree = "<group>"; };
 		92C42BF5290C1A52008F22E8 /* AnaPaylasimCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnaPaylasimCell.swift; sourceTree = "<group>"; };
 		92C7A218294F9B0600B75ED5 /* NewMessageNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageNavBar.swift; sourceTree = "<group>"; };
+		92D39A28295C61F100BB23BE /* UpdateProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileCell.swift; sourceTree = "<group>"; };
+		92DC829B295919DF007EA78A /* HomeScreenNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenNavBar.swift; sourceTree = "<group>"; };
+		92DC829F295921B2007EA78A /* FotografSeciciNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FotografSeciciNavBar.swift; sourceTree = "<group>"; };
 		92E14C6A28F97E280072069F /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		92E14C6C28F98E9D0072069F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -190,6 +204,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		92100AFD295D142F00E6C30D /* KullanıcıGuncelle */ = {
+			isa = PBXGroup;
+			children = (
+				92216D60295BA5D70002D47E /* ResetPasswordController.swift */,
+				92100AFA295CF1F100E6C30D /* UpdatePasswordController.swift */,
+				92100AFE295D145400E6C30D /* UpdateMailController.swift */,
+			);
+			path = "KullanıcıGuncelle";
+			sourceTree = "<group>";
+		};
+		92216D5E295BA5980002D47E /* Giris-Kayıt */ = {
+			isa = PBXGroup;
+			children = (
+				92100AFD295D142F00E6C30D /* KullanıcıGuncelle */,
+				9244A36B2902E2B700E77961 /* OturumAc */,
+				92C42BF1290C18F7008F22E8 /* KayıtOl */,
+			);
+			path = "Giris-Kayıt";
+			sourceTree = "<group>";
+		};
 		9244A36B2902E2B700E77961 /* OturumAc */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +239,7 @@
 				929DCC1A29098F1300AC88FC /* FotografSeciciCell.swift */,
 				92626D35290994CF00C19682 /* FotografSeciciHeader.swift */,
 				92626D3729099CFE00C19682 /* FotografPaylasController.swift */,
+				92DC829F295921B2007EA78A /* FotografSeciciNavBar.swift */,
 			);
 			path = FotografEkle;
 			sourceTree = "<group>";
@@ -215,6 +250,7 @@
 				924F7CEA28FD7A94003E043E /* KullanıcıProfilHeader.swift */,
 				924F7CE728FD6823003E043E /* KullanıcıProfilController.swift */,
 				92C42BEF290C038D008F22E8 /* KullaniciPaylasimFotoCell.swift */,
+				92216D62295BBAA50002D47E /* EditUserDataController.swift */,
 			);
 			path = "KullanıcıProfil";
 			sourceTree = "<group>";
@@ -267,6 +303,7 @@
 				9295752F294E378500A1D479 /* ListeController.swift */,
 				92537981294F39AB005C4C92 /* Uzantı+UiView.swift */,
 				92537983294F3A8D005C4C92 /* Uzantı+UiView+StackView.swift */,
+				92D39A28295C61F100BB23BE /* UpdateProfileCell.swift */,
 			);
 			path = "Uzantılar";
 			sourceTree = "<group>";
@@ -303,13 +340,12 @@
 		92B6F18E28F874DC00CDAF7A /* deneme */ = {
 			isa = PBXGroup;
 			children = (
+				92216D5E295BA5980002D47E /* Giris-Kayıt */,
 				926B0190294A37050029C237 /* Uzantılar */,
 				926B0181294A04F60029C237 /* Messages */,
 				929721DE292B920200AEC99A /* Arama */,
 				92C42BF2290C1911008F22E8 /* AnaSayfa */,
-				92C42BF1290C18F7008F22E8 /* KayıtOl */,
 				924B0B512906E85000B161BC /* FotografEkle */,
-				9244A36B2902E2B700E77961 /* OturumAc */,
 				924F7CEC28FD817F003E043E /* Modal */,
 				924F7CE928FD7A7D003E043E /* KullanıcıProfil */,
 				92E14C6928F97E060072069F /* UIColor */,
@@ -357,6 +393,7 @@
 				92C42BF5290C1A52008F22E8 /* AnaPaylasimCell.swift */,
 				927F63162930DD200069BC95 /* YorumlarController.swift */,
 				927F63182930ECFA0069BC95 /* YorumCell.swift */,
+				92DC829B295919DF007EA78A /* HomeScreenNavBar.swift */,
 			);
 			path = AnaSayfa;
 			sourceTree = "<group>";
@@ -520,9 +557,11 @@
 				9244A36D2902E2D500E77961 /* OturumAcController.swift in Sources */,
 				926B018D294A2F270029C237 /* ListeCell.swift in Sources */,
 				92957522294E217500A1D479 /* UiLabel.swift in Sources */,
+				92100AFB295CF1F100E6C30D /* UpdatePasswordController.swift in Sources */,
 				92537982294F39AB005C4C92 /* Uzantı+UiView.swift in Sources */,
 				929DCC1B29098F1300AC88FC /* FotografSeciciCell.swift in Sources */,
 				924B0B532906E86100B161BC /* FotografSeciciController.swift in Sources */,
+				92216D63295BBAA50002D47E /* EditUserDataController.swift in Sources */,
 				92957526294E252D00A1D479 /* UiTextField.swift in Sources */,
 				926B0183294A05090029C237 /* MessagesController.swift in Sources */,
 				92957530294E378500A1D479 /* ListeController.swift in Sources */,
@@ -531,14 +570,18 @@
 				9215C5EA2951E0ED00684938 /* Message_Eslesme.swift in Sources */,
 				926B018F294A31530029C237 /* ListeHeaderFooterController.swift in Sources */,
 				9295752E294E36F600A1D479 /* ListeHeaderController.swift in Sources */,
+				92216D61295BA5D70002D47E /* ResetPasswordController.swift in Sources */,
 				92537986294F3E75005C4C92 /* NewMessageController.swift in Sources */,
 				927F631B293101AD0069BC95 /* Yorum.swift in Sources */,
+				92100AFF295D145400E6C30D /* UpdateMailController.swift in Sources */,
 				926B0198294A386E0029C237 /* TextFieldIntent.swift in Sources */,
 				924F7CE828FD6823003E043E /* KullanıcıProfilController.swift in Sources */,
 				92B6F19428F874DC00CDAF7A /* KayitOlController.swift in Sources */,
 				924C28F529521B460093617D /* LastMessageNavBar.swift in Sources */,
 				92957528294E256500A1D479 /* UiTextView.swift in Sources */,
+				92D39A29295C61F100BB23BE /* UpdateProfileCell.swift in Sources */,
 				924F7CE528FD679F003E043E /* AnaTabBarController.swift in Sources */,
+				92DC829C295919DF007EA78A /* HomeScreenNavBar.swift in Sources */,
 				92E14C6B28F97E280072069F /* UIColor.swift in Sources */,
 				924FCECF294F6F5100108BE0 /* MessageNavBar.swift in Sources */,
 				929721E2292B9A0000AEC99A /* KullanıcıAramaCell.swift in Sources */,
@@ -559,6 +602,7 @@
 				92957520294E17E800A1D479 /* UiButton.swift in Sources */,
 				926B0196294A381F0029C237 /* ImageViewAspectFill.swift in Sources */,
 				92C42BEE290C0198008F22E8 /* Paylasim.swift in Sources */,
+				92DC82A0295921B2007EA78A /* FotografSeciciNavBar.swift in Sources */,
 				9295752C294E33ED00A1D479 /* DaireselImageView.swift in Sources */,
 				9215C5E82951E0B200684938 /* MessageCell.swift in Sources */,
 				92626D36290994CF00C19682 /* FotografSeciciHeader.swift in Sources */,

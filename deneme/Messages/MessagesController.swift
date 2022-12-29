@@ -8,12 +8,6 @@
 import UIKit
 import Firebase
 
-
-
-
-
-
-
 class MessagesController : ListeController<MessageCell,Message> {
     
     fileprivate lazy var navBar = MessageNavBar(eslesme: eslesme)

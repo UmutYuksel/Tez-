@@ -12,8 +12,10 @@ class TextFieldIntent : UITextField {
     let padding : CGFloat
     
     public init(placeholder : String? = nil, padding : CGFloat = 0, cornerRadius : CGFloat = 0, keyboardType : UIKeyboardType = .default, backgroundColor : UIColor = UIColor.clear, isSecureTextEntry : Bool = false) {
+        
         self.padding = padding
         super.init(frame: .zero)
+        
         self.placeholder = placeholder
         layer.cornerRadius = cornerRadius
         self.backgroundColor = backgroundColor

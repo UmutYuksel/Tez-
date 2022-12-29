@@ -24,6 +24,7 @@ class YorumlarController : UICollectionViewController {
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: -80, right: 0)
         collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: -80, right: 0)
         collectionView.register(YorumCell.self, forCellWithReuseIdentifier: yorumcellID)
+        UIBarButtonItem.appearance().tintColor = UIColor.orangeTint()
         
         yorumlarıGetir()
     }
@@ -86,8 +87,7 @@ class YorumlarController : UICollectionViewController {
         btnCommentSend.addTarget(self, action: #selector(btnCommentSendPressed), for: .touchUpInside)
         
         containerView.addSubview(txtComment)
-        
-        txtComment.anchor(top: containerView.safeAreaLayoutGuide.topAnchor, bottom: containerView.safeAreaLayoutGuide.bottomAnchor, leading: containerView.safeAreaLayoutGuide.leadingAnchor, trailing: btnCommentSend.leadingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: 0, height: 0)
+        txtComment.anchor(top: containerView.safeAreaLayoutGuide.topAnchor, bottom: containerView.safeAreaLayoutGuide.bottomAnchor, leading: containerView.safeAreaLayoutGuide.leadingAnchor, trailing: btnCommentSend.leadingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeft: 20, paddingRight: 0, width: 0, height: 0)
         
         let ayracView = UIView()
         ayracView.backgroundColor = UIColor.rgbDonustur(red: 230, green: 230, blue: 230)

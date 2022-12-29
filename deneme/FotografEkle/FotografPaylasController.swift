@@ -63,7 +63,7 @@ class FotografPaylasController : UIViewController {
         
         let fotografAdi = UUID().uuidString
         guard let paylasimFotograf = secilenFotograf else { return }
-        let fotografData = paylasimFotograf.jpegData(compressionQuality: 0.8) ?? Data()
+        let fotografData = paylasimFotograf.jpegData(compressionQuality: 1) ?? Data()
         
         let ref = Storage.storage().reference(withPath: "/Paylasimlar/\(fotografAdi)")
         
@@ -115,14 +115,20 @@ class FotografPaylasController : UIViewController {
                 return
             }
             print("Paylaşım Başarı İle Kaydedildi Ve Paylaşım Döküman ID'si :",ref?.documentID)
-            self.dismiss(animated: true,completion: nil)
             
-            
-            NotificationCenter.default.post(name: FotografPaylasController.guncelleNotification, object: nil)
         })
         let paylasimSayisi = db.collection("Kullanicilar").document(gecerliKullaniciID)
         paylasimSayisi.updateData([
             "PaylasimSayisi" : FieldValue.increment(Int64(1))
         ])
+        let keyWindow = UIApplication.shared.connectedScenes.filter({$0.activationState == .foregroundActive})
+            .map({$0 as? UIWindowScene})
+            .compactMap({$0})
+            .first?.windows
+            .filter({$0.isKeyWindow}).first
+        guard let anaTabBarController = keyWindow?.rootViewController as? AnaTabBarController else { return }
+        anaTabBarController.viewDidLoad() // KullanıcıProfilContollera Gidilir
+        self.dismiss(animated: true, completion: nil) // Oturum Açma Ekranını Kapatmak İçin
+        NotificationCenter.default.post(name: FotografPaylasController.guncelleNotification, object: nil)
     }
 }
